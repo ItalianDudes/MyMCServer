@@ -1,0 +1,4 @@
+name: MyMCServer
+version: '${version}'
+main: it.italiandudes.mymcserver.MyMCServer
+api-version: 1.19
