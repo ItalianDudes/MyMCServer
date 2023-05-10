@@ -35,7 +35,7 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:23.0.0'
     compileOnly 'commons-codec:commons-codec:1.15'
     compileOnly 'commons-io:commons-io:2.11.0'
-    implementation 'it.italiandudes:idl:1.0.4'
+    implementation 'it.italiandudes:idl:1.0.5'
     // implementation group: 'org.xerial', name:'sqlite-jdbc', version:'3.40.0.0'
 
 }
