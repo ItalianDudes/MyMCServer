@@ -6,7 +6,7 @@ plugins {
 
 //Version
 final String VERSION_MAJOR = '0' // Big updates, usually flagged as RELEASE
-final String VERSION_MINOR = '0' // Feature implementation, various patches
+final String VERSION_MINOR = '1' // Feature implementation, various patches
 final String VERSION_PATCH = '0' // Small patch
 final String VERSION_IDENTIFIER = 'A' // Valid Values: [R]elease, [B]eta, [A]lpha
 
