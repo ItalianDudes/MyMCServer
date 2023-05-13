@@ -19,6 +19,7 @@ public final class ServerListener extends Thread {
         this.setName("MyMCServerListener");
     }
 
+    // Thread Killer
     public void closeListener() {
         try {
             serverSocket.close();
@@ -26,6 +27,7 @@ public final class ServerListener extends Thread {
         serverSocket = null;
     }
 
+    // Thread Method
     @Override
     public void run() {
         try {
@@ -34,6 +36,7 @@ public final class ServerListener extends Thread {
                 try {
                     Socket newConnection = serverSocket.accept();
                     // TODO: handle the connection
+                    newConnection.close(); // TODO: Workaorund: va rimosso dopo l'implementazione di un handler
                 }catch (IOException ignored){}
             }
         }catch (NullPointerException ignored){}

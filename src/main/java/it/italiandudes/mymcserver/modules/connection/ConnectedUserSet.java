@@ -10,57 +10,78 @@ import java.util.HashSet;
 public final class ConnectedUserSet {
 
     // Attributes
-    private final static HashSet<Peer> peerList = new HashSet<>();
+    private final static HashSet<UserHandler> userHandlerList = new HashSet<>();
 
     // Methods
-    private static boolean addPeer(@NotNull final Peer newPeer) {
-        return peerList.add(newPeer);
+    public static boolean addUserHandler(@NotNull final UserHandler newUserHandler) {
+        return userHandlerList.add(newUserHandler);
     }
-    private static boolean removePeer(@NotNull final Peer peer) {
-        try {
-            peer.getPeerSocket().close();
-        }catch (Exception ignored) {}
-        return peerList.remove(peer);
+    public static boolean addUserHandler(@NotNull final Peer peer) {
+        if (containsUserHandler(peer)) return false;
+        UserHandler newUserHandler = new UserHandler(peer);
+        newUserHandler.start();
+        return userHandlerList.add(newUserHandler);
     }
-    private static boolean removePeer(@NotNull final Credential credential) {
-        for (Peer peer : peerList) {
-            if (peer.getCredential().equals(credential)) {
-                return removePeer(peer);
+    public static boolean removeUserHandler(@NotNull final UserHandler userHandler) {
+        if (!userHandlerList.contains(userHandler)) return false;
+        userHandler.closeUserHandler();
+        return userHandlerList.remove(userHandler);
+    }
+    public static boolean removeUserHandler(@NotNull final Peer peer) {
+        for (UserHandler userHandler : userHandlerList) {
+            if (userHandler.getPeer().equals(peer)) {
+                return removeUserHandler(userHandler);
             }
         }
         return false;
     }
-    private static boolean removePeer(@NotNull final String username) {
-        for (Peer peer : peerList) {
-            if (peer.getCredential().getUsername().equals(username)) {
-                return removePeer(peer);
+    public static boolean removeUserHandler(@NotNull final Credential credential) {
+        for (UserHandler userHandler : userHandlerList) {
+            if (userHandler.getPeer().getCredential().equals(credential)) {
+                return removeUserHandler(userHandler);
             }
         }
         return false;
     }
-    private static boolean containsPeer(@NotNull final Peer peer) {
-        return peerList.contains(peer);
-    }
-    private static boolean containsPeer(@NotNull final Credential credential) {
-        for (Peer peer : peerList) {
-            if (peer.getCredential().equals(credential)) {
-                return containsPeer(peer);
+    public static boolean removeUserHandler(@NotNull final String username) {
+        for (UserHandler userHandler : userHandlerList) {
+            if (userHandler.getPeer().getCredential().getUsername().equals(username)) {
+                return removeUserHandler(userHandler);
             }
         }
         return false;
     }
-    private static boolean containsPeer(@NotNull final String username) {
-        for (Peer peer : peerList) {
-            if (peer.getCredential().getUsername().equals(username)) {
-                return containsPeer(peer);
+    public static boolean containsUserHandler(@NotNull final UserHandler userHandler) {
+        return userHandlerList.contains(userHandler);
+    }
+    public static boolean containsUserHandler(@NotNull final Peer peer) {
+        for (UserHandler userHandler : userHandlerList) {
+            if (userHandler.getPeer().equals(peer)) {
+                return true;
             }
         }
         return false;
     }
-    private static void flushSet() {
-        for (Peer peer : peerList) {
-            removePeer(peer);
+    public static boolean containsUserHandler(@NotNull final Credential credential) {
+        for (UserHandler userHandler : userHandlerList) {
+            if (userHandler.getPeer().getCredential().equals(credential)) {
+                return true;
+            }
         }
-        peerList.clear();
+        return false;
+    }
+    public static boolean containsUserHandler(@NotNull final String username) {
+        for (UserHandler userHandler : userHandlerList) {
+            if (userHandler.getPeer().getCredential().getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void clear() {
+        for (UserHandler userHandler : userHandlerList) {
+            removeUserHandler(userHandler);
+        }
+        userHandlerList.clear();
     }
 }

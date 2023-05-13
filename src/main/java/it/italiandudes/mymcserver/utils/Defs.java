@@ -100,4 +100,9 @@ public final class Defs {
             public static final String EE_RELOAD = "reload";
         }
     }
+
+    // Protocol
+    public static final class Protocol {
+        public static final String PROTOCOL_DISCONNECT = "disconnect";
+    }
 }
