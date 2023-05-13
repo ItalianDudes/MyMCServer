@@ -83,6 +83,7 @@ public final class Defs {
 
     // DBConnection Constants
     public static final class DBConnection {
+        public static final String JDBC_DB_UNCONFIGURED = "unconfigured";
         public static final String JDBC_MYSQL_CONNECTOR_STRING_START = "jdbc:mysql";
         public static final String JDBC_SQLITE_CONNECTOR_STRING_START = "jdbc:sqlite";
         public static final String JDBC_POSTGRESQL_CONNECTOR_STRING_START = "jdbc:postgresql";
@@ -103,6 +104,11 @@ public final class Defs {
 
     // Protocol
     public static final class Protocol {
+        public static final class StartingProtocol {
+            public static final String STARTING_PROTOCOL_LOGIN = "login";
+        }
+        public static final String PROTOCOL_COMMAND = "command";
+        public static final String PROTOCOL_SSH = "ssh";
         public static final String PROTOCOL_DISCONNECT = "disconnect";
     }
 }

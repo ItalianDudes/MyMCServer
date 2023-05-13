@@ -58,13 +58,18 @@ public final class DBConnectionModule {
     }
     public static void load(@NotNull String jdbcConnectionString, final boolean disableLog) throws ModuleException {
 
+        if (jdbcConnectionString.equalsIgnoreCase(Defs.DBConnection.JDBC_DB_UNCONFIGURED)) {
+            if (!disableLog) ServerLogger.getLogger().warning("DBConnection Module Load: Canceled! (Reason: the jdbc connection string in the config wasn't configured)");
+            throw new ModuleMissingConfigsException("DBConnection Module Load: Canceled! (Reason: the jdbc connection string in the config wasn't configured)");
+        }
+
         if (isDBConnecting) {
-            if (!disableLog) ServerLogger.getLogger().warning("DBConnect Module Load: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
-            throw new ModuleLoadingException("DBConnect Module Load: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
+            if (!disableLog) ServerLogger.getLogger().warning("DBConnection Module Load: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
+            throw new ModuleLoadingException("DBConnection Module Load: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
         }
         if (isModuleLoaded()) {
-            if (!disableLog) ServerLogger.getLogger().severe("DBConnect Module Load: Failed! (Reason: the module has already been loaded)");
-            throw new ModuleAlreadyLoadedException("DBConnect Module Load: Failed! (Reason: the module has already been loaded)");
+            if (!disableLog) ServerLogger.getLogger().severe("DBConnection Module Load: Failed! (Reason: the module has already been loaded)");
+            throw new ModuleAlreadyLoadedException("DBConnection Module Load: Failed! (Reason: the module has already been loaded)");
         }
 
         isDBConnecting = true;
@@ -77,7 +82,7 @@ public final class DBConnectionModule {
         }else if (jdbcConnectionString.startsWith(Defs.DBConnection.JDBC_POSTGRESQL_CONNECTOR_STRING_START)) {
             dbType = Defs.DBConnection.POSTGRESQL_CONNECTOR;
         }else {
-            throw new ModuleLoadingException("DBConnect Module Load: Failed! (Reason: can't recognize connector type)");
+            throw new ModuleLoadingException("DBConnection Module Load: Failed! (Reason: can't recognize connector type)");
         }
 
         if (jdbcConnectionString.contains("allowMultiQueries=false")) {
@@ -101,12 +106,12 @@ public final class DBConnectionModule {
             dbType = null;
             dbConnection = null;
             isDBConnecting = false;
-            if (!disableLog) ServerLogger.getLogger().severe("DBConnect Module Load: Failed! (Reason: an error during connection has occurred)");
-            throw new ModuleLoadingException("DBConnect Module Load: Failed! (Reason: an error during connection has occurred)", e);
+            if (!disableLog) ServerLogger.getLogger().severe("DBConnection Module Load: Failed! (Reason: an error during connection has occurred)");
+            throw new ModuleLoadingException("DBConnection Module Load: Failed! (Reason: an error during connection has occurred)", e);
         }
 
         isDBConnecting = false;
-        if (!disableLog) ServerLogger.getLogger().info("DBConnect Module Load: Successful!");
+        if (!disableLog) ServerLogger.getLogger().info("DBConnection Module Load: Successful!");
     }
     public static void unload() throws ModuleException {
         unload(true);
@@ -137,29 +142,29 @@ public final class DBConnectionModule {
     public static void reload(@NotNull final String jdbcConnectionString, final boolean disableLog) throws ModuleException {
 
         if (isDBConnecting) {
-            if (!disableLog) ServerLogger.getLogger().warning("DBConnect Module Reload: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
-            throw new ModuleLoadingException("DBConnect Module Reload: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
+            if (!disableLog) ServerLogger.getLogger().warning("DBConnection Module Reload: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
+            throw new ModuleLoadingException("DBConnection Module Reload: Canceled! (Reason: Another thread is executing a dbconnection loading command)");
         }
         if (isModuleLoaded()) {
-            if (!disableLog) ServerLogger.getLogger().severe("DBConnect Module Reload: Failed! (Reason: the module has already been loaded)");
-            throw new ModuleAlreadyLoadedException("DBConnect Module Reload: Failed! (Reason: the module has already been loaded)");
+            if (!disableLog) ServerLogger.getLogger().severe("DBConnection Module Reload: Failed! (Reason: the module has already been loaded)");
+            throw new ModuleAlreadyLoadedException("DBConnection Module Reload: Failed! (Reason: the module has already been loaded)");
         }
 
         try {
             unload(true);
         } catch (ModuleException e) {
-            if (!disableLog) ServerLogger.getLogger().severe("DBConnect Module Reload: Failed! (Reason: an error has occurred in the unload routine)");
-            throw new ModuleReloadingException("DBConnect Module Reload: Failed! (Reason: an error has occurred in the unload routine)");
+            if (!disableLog) ServerLogger.getLogger().severe("DBConnection Module Reload: Failed! (Reason: an error has occurred in the unload routine)");
+            throw new ModuleReloadingException("DBConnection Module Reload: Failed! (Reason: an error has occurred in the unload routine)");
         }
 
         try {
             load(jdbcConnectionString, true);
         } catch (ModuleException e) {
-            if (!disableLog) ServerLogger.getLogger().severe("DBConnect Module Reload: Failed! (Reason: the load routine has failed)");
-            throw new ModuleReloadingException("DBConnect Module Reload: Failed! (Reason: the load routine has failed)", e);
+            if (!disableLog) ServerLogger.getLogger().severe("DBConnection Module Reload: Failed! (Reason: the load routine has failed)");
+            throw new ModuleReloadingException("DBConnection Module Reload: Failed! (Reason: the load routine has failed)", e);
         }
 
-        if (!disableLog) ServerLogger.getLogger().info("DBConnect Module Reload: Successful!");
+        if (!disableLog) ServerLogger.getLogger().info("DBConnection Module Reload: Successful!");
     }
     @NotNull
     public static PreparedStatement getPreparedStatement(@NotNull final String sql) throws ModuleException {
