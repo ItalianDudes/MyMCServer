@@ -18,13 +18,15 @@ public final class Defs {
                 throw new RuntimeException(e);
             }
         }
-        public static final String PLUGIN_VERSION = "0.13.12A";
+        public static final String PLUGIN_VERSION = "0.0.1A";
     }
 
     // Module Names
     public static final class ModuleNames {
         public static final String MODULE_LOCALIZATION = "localization";
         public static final String MODULE_CONFIG = "config";
+        public static final String MODULE_DBCONNECTION = "dbconnection";
+        public static final String MODULE_CONNECTION = "connection";
         public static final String MODULE_COMMANDS = "commands";
     }
 
@@ -42,6 +44,7 @@ public final class Defs {
             // General Config File
             public static final class General {
                 public static final String KEY_LANG = "language_pack";
+                public static final String KEY_DATABASE_URL = "database_url";
             }
         }
     }
@@ -77,7 +80,23 @@ public final class Defs {
         }
     }
 
+    // DBConnection Constants
+    public static final class DBConnection {
+        public static final String JDBC_MYSQL_CONNECTOR_STRING_START = "jdbc:mysql";
+        public static final String JDBC_SQLITE_CONNECTOR_STRING_START = "jdbc:sqlite";
+        public static final String JDBC_POSTGRESQL_CONNECTOR_STRING_START = "jdbc:postgresql";
+        public static final String MYSQL_CONNECTOR = "mysql";
+        public static final String SQLITE_CONNECTOR = "sqlite";
+        public static final String POSTGRESQL_CONNECTOR = "postgresql";
+    }
+
     // Command Constants
     public static final class Commands {
+        public static final class MyMCServer {
+            public static final String[] COMMAND_NAME = {"mymcserver", "mmcs"};
+            public static final String EE_LOAD = "load";
+            public static final String EE_UNLOAD = "unload";
+            public static final String EE_RELOAD = "reload";
+        }
     }
 }
