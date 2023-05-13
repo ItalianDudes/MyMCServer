@@ -1,0 +1,18 @@
+{
+  "test_entry": "valore di test",
+  "ee_version": "Versione di EnhancedEconomy: ",
+  "ee_info": "Nome Plugin: EnhancedEconomy\nAutore: Hacker6329\nDescrizione: Un plugin che implementa un sistema economico simil-realistico.",
+  "command_execution_error": "Si è verificato un errore durante l'esecuzione del comando.",
+  "command_syntax_error": "La sintassi del comando è errata, consulta per capire come funziona usando il comando /help <comando>",
+  "command_loading_started": "Caricamento Modulo: ",
+  "command_loading_success": "Caricamento Modulo Riuscito: ",
+  "command_loading_fail": "Caricamento Modulo Fallito: ",
+  "command_unloading_started": "Rimozione Modulo: ",
+  "command_unloading_success": "Rimozione Modulo Riuscito: ",
+  "command_unloading_fail": "Rimozione Modulo Fallito: ",
+  "command_reloading_started": "Ricaricamento Plugin: ",
+  "command_reloading_success": "Ricaricamento Plugin Riuscito: ",
+  "command_reloading_fail": "Ricaricamento Plugin Fallito: ",
+  "command_module_not_loaded": "Impossibile eseguire il comando: il modulo dei comandi non è stato caricato.",
+  "command_missing_permissions": "Impossibile eseguire il comando: permessi non sufficienti."
+}

@@ -1,0 +1,18 @@
+{
+  "test_entry": "test_entry",
+  "ee_version": "EnhancedEconomy Version: ",
+  "ee_info": "Plugin Name: EnhancedEconomy\nAuthor: Hacker6329\nDescription: A plugin that implements a similar realistic economy system.",
+  "command_execution_error": "An error has occurred during the command execution.",
+  "command_syntax_error": "The syntax of the command is wrong, check the usage using /help <command>",
+  "command_loading_started": "Loading Module: ",
+  "command_loading_success": "Loading Module Success: ",
+  "command_loading_fail": "Loading Module Failed: ",
+  "command_unloading_started": "Unloading Module: ",
+  "command_unloading_success": "Unloading Module Success: ",
+  "command_unloading_fail": "Unloading Module Failed: ",
+  "command_reloading_started": "Reloading Module: ",
+  "command_reloading_success": "Reloading Module Success: ",
+  "command_reloading_fail": "Reloading Module Failed: ",
+  "command_module_not_loaded": "Can't execute the command: the commands module isn't loaded.",
+  "command_missing_permissions": "Can't execute the command: insufficient permissions."
+}
