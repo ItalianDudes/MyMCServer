@@ -45,6 +45,7 @@ public final class Defs {
             public static final class General {
                 public static final String KEY_LANG = "language_pack";
                 public static final String KEY_DATABASE_URL = "database_url";
+                public static final String KEY_CONNECTION_PORT = "connection_port";
             }
         }
     }
