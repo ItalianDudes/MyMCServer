@@ -1,0 +1,4 @@
+{
+  "language_pack": "en-US",
+  "database_url": "jdbc:mysql://localhost:3306?allowMultiQueries=true"
+}
