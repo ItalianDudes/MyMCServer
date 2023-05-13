@@ -33,11 +33,15 @@ public final class ServerListener extends Thread {
         try {
             //noinspection InfiniteLoopStatement
             while (true) {
+                Socket newConnection;
                 try {
-                    Socket newConnection = serverSocket.accept();
-                    // TODO: handle the connection
-                    newConnection.close(); // TODO: Workaorund: va rimosso dopo l'implementazione di un handler
-                }catch (IOException ignored){}
+                    newConnection = serverSocket.accept();
+                }catch (IOException e) {
+                    newConnection = null;
+                }
+                if (newConnection != null) {
+                    new LoginHandler(newConnection).start();
+                }
             }
         }catch (NullPointerException ignored){}
     }

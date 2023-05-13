@@ -1,10 +1,8 @@
 package it.italiandudes.mymcserver.modules.connection;
 
 import it.italiandudes.mymcserver.exceptions.ModuleException;
-import it.italiandudes.mymcserver.exceptions.modules.ModuleAlreadyLoadedException;
-import it.italiandudes.mymcserver.exceptions.modules.ModuleLoadingException;
-import it.italiandudes.mymcserver.exceptions.modules.ModuleNotLoadedException;
-import it.italiandudes.mymcserver.exceptions.modules.ModuleReloadingException;
+import it.italiandudes.mymcserver.exceptions.modules.*;
+import it.italiandudes.mymcserver.modules.DBConnectionModule;
 import it.italiandudes.mymcserver.utils.ServerLogger;
 
 import java.io.IOException;
@@ -33,6 +31,11 @@ public final class ConnectionModule {
         load(port, false);
     }
     public synchronized static void load(final int port, final boolean disableLog) throws ModuleException {
+
+        if (!DBConnectionModule.isModuleLoaded()) {
+            if (!disableLog) ServerLogger.getLogger().warning("Connection Module Load: Canceled! (Reason: DBConnection module isn't loaded)");
+            throw new ModuleMissingDependenciesException("Connection Module Load: Canceled! (Reason: DBConnection module isn't loaded)");
+        }
 
         if (areConnectionLoading) {
             if (!disableLog) ServerLogger.getLogger().warning("Connection Module Load: Canceled! (Reason: Another thread is executing a connection loading command)");

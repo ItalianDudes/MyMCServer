@@ -10,18 +10,21 @@ public final class ProtocolExecutionQueue {
 
     // Implementing List
     @NotNull private final LinkedList<String> queue;
+    private final UserHandler userHandler;
     private boolean isShutdown;
 
     // Constructors
-    public ProtocolExecutionQueue() {
+    public ProtocolExecutionQueue(@NotNull final UserHandler userHandler) {
         this.queue = new LinkedList<>();
         isShutdown = false;
+        this.userHandler = userHandler;
     }
 
     // Methods
     public synchronized void enqueue(@NotNull final String s) {
         if (isShutdown) return;
         queue.addLast(s);
+        userHandler.notify();
     }
     public synchronized String dequeue() {
         try {
