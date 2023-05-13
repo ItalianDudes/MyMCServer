@@ -94,12 +94,10 @@ public final class Defs {
 
     // Command Constants
     public static final class Commands {
-        public static final class MyMCServer {
-            public static final String[] COMMAND_NAME = {"mymcserver", "mmcs"};
-            public static final String EE_LOAD = "load";
-            public static final String EE_UNLOAD = "unload";
-            public static final String EE_RELOAD = "reload";
-        }
+        public static final String MMCS_LOAD = "mmcsload";
+        public static final String MMCS_UNLOAD = "mmcsunload";
+        public static final String MMCS_RELOAD = "mmcsreload";
+        public static final String[] COMMAND_NAME = {"mymcserver", "mmcs"};
     }
 
     // Protocol

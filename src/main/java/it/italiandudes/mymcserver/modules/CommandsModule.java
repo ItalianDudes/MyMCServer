@@ -1,6 +1,11 @@
 package it.italiandudes.mymcserver.modules;
 
 import it.italiandudes.idl.common.StringHandler;
+import it.italiandudes.mymcserver.MyMCServer;
+import it.italiandudes.mymcserver.commands.MyMCServerCommand;
+import it.italiandudes.mymcserver.commands.mymcserver.modules.MMCSReloadCommand;
+import it.italiandudes.mymcserver.commands.mymcserver.modules.MMCSUnloadCommand;
+import it.italiandudes.mymcserver.commands.mymcserver.modules.MMCSLoadCommand;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.exceptions.modules.ModuleAlreadyLoadedException;
 import it.italiandudes.mymcserver.exceptions.modules.ModuleLoadingException;
@@ -53,6 +58,10 @@ public final class CommandsModule {
 
         // List of commands here...
         try {
+            registerCommand(MyMCServer.getPluginInstance(), MyMCServerCommand.COMMAND_NAME, new MyMCServerCommand());
+            registerCommand(MyMCServer.getPluginInstance(), MMCSLoadCommand.COMMAND_NAME, new MMCSLoadCommand());
+            registerCommand(MyMCServer.getPluginInstance(), MMCSUnloadCommand.COMMAND_NAME, new MMCSUnloadCommand());
+            registerCommand(MyMCServer.getPluginInstance(), MMCSReloadCommand.COMMAND_NAME, new MMCSReloadCommand());
         } catch (Exception e) {
             areCommandsLoading = false;
             if (!disableLog) ServerLogger.getLogger().severe("Commands Module Load: Failed! (Reason: an error has occurred on module loading)");

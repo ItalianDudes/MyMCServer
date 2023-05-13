@@ -1,0 +1,25 @@
+name: MyMCServer
+version: '0.0.1A'
+author: Hacker6329
+prefix: MyMCServer
+main: it.italiandudes.mymcserver.MyMCServer
+description: mymcserver
+load: POSTWORLD
+api-version: 1.19
+libraries:
+  - commons-codec:commons-codec:1.15
+  - commons-io:commons-io:2.11.0
+commands:
+  mymcserver:
+    description: Shows the info about the plugin.
+    usage: /<command> <info>
+    aliases: mmcs
+  mmcsload:
+    description: Load one or more plugin's modules.
+    usage: /<command> <module> <parameters> [module1 parameters1 ...]
+  mmcsunload:
+    description: Unload one or more plugin's modules.
+    usage: /<command> <module> [module1 ...]
+  mmcsreload:
+    description: Reload one or more plugin's modules.
+    usage: /<command> <module> <parameters> [module1 parameters1 ...]
