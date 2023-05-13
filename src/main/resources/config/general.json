@@ -1,5 +1,5 @@
 {
   "language_pack": "en-US",
-  "database_url": "jdbc:mysql://localhost:3306?allowMultiQueries=true",
-  "connection_port": 25575
+  "database_url": "unconfigured",
+  "connection_port": "25575"
 }
