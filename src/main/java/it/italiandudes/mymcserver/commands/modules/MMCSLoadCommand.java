@@ -1,4 +1,4 @@
-package it.italiandudes.mymcserver.commands.mymcserver.modules;
+package it.italiandudes.mymcserver.commands.modules;
 
 import it.italiandudes.mymcserver.MyMCServer;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
@@ -135,7 +135,12 @@ public final class MMCSLoadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_CONNECTION -> {
-                        if (i+1 < args.length) {
+                        if (!DBConnectionModule.isModuleLoaded()) {
+                            sender.sendMessage(
+                                ChatColor.RED +
+                                LocalizationModule.translate(Keys.COMMAND_LOADING_DEPENDENCIES_ARE_OFF)
+                            );
+                        }else if (i+1 < args.length) {
                             i++;
                             try {
                                 sender.sendMessage(

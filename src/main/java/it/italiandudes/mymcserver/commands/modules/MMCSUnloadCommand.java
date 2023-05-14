@@ -1,4 +1,4 @@
-package it.italiandudes.mymcserver.commands.mymcserver.modules;
+package it.italiandudes.mymcserver.commands.modules;
 
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.modules.CommandsModule;
@@ -48,24 +48,31 @@ public final class MMCSUnloadCommand implements CommandExecutor {
             try {
                 switch (module) {
                     case Defs.ModuleNames.MODULE_DBCONNECTION -> {
-                        try {
-                            sender.sendMessage(
-                                ChatColor.AQUA +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_STARTED) +
-                                Defs.ModuleNames.MODULE_DBCONNECTION
-                            );
-                            DBConnectionModule.unload(!(sender instanceof Player));
-                            sender.sendMessage(
-                                ChatColor.AQUA +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_SUCCESS) +
-                                Defs.ModuleNames.MODULE_DBCONNECTION
-                            );
-                        } catch (ModuleException e) {
+                        if (DBConnectionModule.isModuleLoaded()) {
                             sender.sendMessage(
                                 ChatColor.RED +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_FAIL) +
-                                Defs.ModuleNames.MODULE_DBCONNECTION
+                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_DEPENDANT_ARE_ON)
                             );
+                        }else {
+                            try {
+                                sender.sendMessage(
+                                    ChatColor.AQUA +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_STARTED) +
+                                    Defs.ModuleNames.MODULE_DBCONNECTION
+                                );
+                                DBConnectionModule.unload(!(sender instanceof Player));
+                                sender.sendMessage(
+                                    ChatColor.AQUA +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_SUCCESS) +
+                                    Defs.ModuleNames.MODULE_DBCONNECTION
+                                );
+                            } catch (ModuleException e) {
+                                sender.sendMessage(
+                                    ChatColor.RED +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_FAIL) +
+                                    Defs.ModuleNames.MODULE_DBCONNECTION
+                                );
+                            }
                         }
                     }
 
@@ -126,7 +133,7 @@ public final class MMCSUnloadCommand implements CommandExecutor {
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_SUCCESS) +
                                 Defs.ModuleNames.MODULE_CONNECTION
                             );
-                        }catch (ModuleException e) {
+                        } catch (ModuleException e) {
                             sender.sendMessage(
                                 ChatColor.RED +
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_UNLOADING_FAIL) +

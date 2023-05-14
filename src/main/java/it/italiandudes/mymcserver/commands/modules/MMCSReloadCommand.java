@@ -1,4 +1,4 @@
-package it.italiandudes.mymcserver.commands.mymcserver.modules;
+package it.italiandudes.mymcserver.commands.modules;
 
 import it.italiandudes.mymcserver.MyMCServer;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
@@ -50,7 +50,12 @@ public final class MMCSReloadCommand implements CommandExecutor {
             try {
                 switch (args[i]) {
                     case Defs.ModuleNames.MODULE_DBCONNECTION -> {
-                        if (i + 1 < args.length) {
+                        if (!DBConnectionModule.isModuleLoaded()) {
+                            sender.sendMessage(
+                                ChatColor.RED +
+                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
+                            );
+                        } else if (i + 1 < args.length) {
                             i++;
                             try {
                                 sender.sendMessage(
@@ -81,7 +86,12 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_CONNECTION -> {
-                        if (i+1 < args.length) {
+                        if (!DBConnectionModule.isModuleLoaded()) {
+                            sender.sendMessage(
+                                ChatColor.RED +
+                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
+                            );
+                        } else if (i+1 < args.length) {
                             i++;
                             try {
                                 sender.sendMessage(
@@ -122,7 +132,12 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_LOCALIZATION -> {
-                        if (i + 1 < args.length) {
+                        if (!DBConnectionModule.isModuleLoaded()) {
+                            sender.sendMessage(
+                                    ChatColor.RED +
+                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
+                            );
+                        } else if (i + 1 < args.length) {
                             i++;
                             try {
                                 sender.sendMessage(
@@ -153,46 +168,60 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_CONFIG -> {
-                        try {
-                            sender.sendMessage(
-                                ChatColor.AQUA +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_STARTED) +
-                                Defs.ModuleNames.MODULE_CONFIG
-                            );
-                            ConfigModule.reload(MyMCServer.getPluginInstance(), !(sender instanceof Player));
-                            sender.sendMessage(
-                                ChatColor.AQUA +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_SUCCESS) +
-                                Defs.ModuleNames.MODULE_CONFIG
-                            );
-                        } catch (ModuleException e) {
+                        if (!DBConnectionModule.isModuleLoaded()) {
                             sender.sendMessage(
                                 ChatColor.RED +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_FAIL) +
-                                Defs.ModuleNames.MODULE_CONFIG
+                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
                             );
+                        } else {
+                            try {
+                                sender.sendMessage(
+                                    ChatColor.AQUA +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_STARTED) +
+                                    Defs.ModuleNames.MODULE_CONFIG
+                                );
+                                ConfigModule.reload(MyMCServer.getPluginInstance(), !(sender instanceof Player));
+                                sender.sendMessage(
+                                    ChatColor.AQUA +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_SUCCESS) +
+                                    Defs.ModuleNames.MODULE_CONFIG
+                                );
+                            } catch (ModuleException e) {
+                                sender.sendMessage(
+                                    ChatColor.RED +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_FAIL) +
+                                    Defs.ModuleNames.MODULE_CONFIG
+                                );
+                            }
                         }
                     }
 
                     case Defs.ModuleNames.MODULE_COMMANDS -> {
-                        try {
-                            sender.sendMessage(
-                                ChatColor.AQUA +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_STARTED) +
-                                Defs.ModuleNames.MODULE_COMMANDS
-                            );
-                            CommandsModule.reload(MyMCServer.getPluginInstance(), !(sender instanceof Player));
-                            sender.sendMessage(
-                                ChatColor.AQUA +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_SUCCESS) +
-                                Defs.ModuleNames.MODULE_COMMANDS
-                            );
-                        } catch (ModuleException e) {
+                        if (!DBConnectionModule.isModuleLoaded()) {
                             sender.sendMessage(
                                 ChatColor.RED +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_FAIL) +
-                                Defs.ModuleNames.MODULE_COMMANDS
+                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
                             );
+                        } else {
+                            try {
+                                sender.sendMessage(
+                                    ChatColor.AQUA +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_STARTED) +
+                                    Defs.ModuleNames.MODULE_COMMANDS
+                                );
+                                CommandsModule.reload(MyMCServer.getPluginInstance(), !(sender instanceof Player));
+                                sender.sendMessage(
+                                    ChatColor.AQUA +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_SUCCESS) +
+                                    Defs.ModuleNames.MODULE_COMMANDS
+                                );
+                            } catch (ModuleException e) {
+                                sender.sendMessage(
+                                    ChatColor.RED +
+                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_FAIL) +
+                                    Defs.ModuleNames.MODULE_COMMANDS
+                                );
+                            }
                         }
                     }
 

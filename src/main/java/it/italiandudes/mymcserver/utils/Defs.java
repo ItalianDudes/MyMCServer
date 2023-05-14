@@ -63,8 +63,8 @@ public final class Defs {
         // Lang Keys
         public static final class Keys {
             public static final String TEST_ENTRY = "test_entry";
-            public static final String EE_VERSION = "ee_version";
-            public static final String EE_INFO = "ee_info";
+            public static final String MMCS_VERSION = "ee_version";
+            public static final String MMCS_INFO = "ee_info";
             public static final String COMMAND_EXECUTION_ERROR = "command_execution_error";
             public static final String COMMAND_SYNTAX_ERROR = "command_syntax_error";
             public static final String COMMAND_LOADING_STARTED = "command_loading_started";
@@ -78,6 +78,9 @@ public final class Defs {
             public static final String COMMAND_RELOADING_FAIL = "command_reloading_fail";
             public static final String COMMAND_MODULE_NOT_LOADED = "command_module_not_loaded";
             public static final String COMMAND_MISSING_PERMISSIONS = "command_missing_permissions";
+            public static final String COMMAND_UNLOADING_DEPENDANT_ARE_ON = "dependant_module_are_on";
+            public static final String COMMAND_LOADING_DEPENDENCIES_ARE_OFF = "dependencies_module_are_off";
+            public static final String COMMAND_RELOADING_MODULE_IS_OFF = "command_reloading_module_is_off";
         }
     }
 

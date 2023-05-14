@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public final class MyMCServerCommand implements CommandExecutor {
 
     // Command Name
-    public static final String COMMAND_NAME = "mymcserver";
+    public static final String COMMAND_NAME = Defs.Commands.COMMAND_NAME[0];
     public static final boolean RUN_WITH_MODULE_NOT_LOADED = true;
 
     // Command Arguments
@@ -43,11 +43,11 @@ public final class MyMCServerCommand implements CommandExecutor {
             switch (args[0].toLowerCase()) {
                 case Arguments.INFO -> sender.sendMessage(
                         ChatColor.AQUA +
-                        LocalizationModule.translate(Keys.EE_INFO)
+                        LocalizationModule.translate(Keys.MMCS_INFO)
                 );
                 case Arguments.VERSION -> sender.sendMessage(
                     ChatColor.AQUA +
-                    LocalizationModule.translate(Keys.EE_VERSION) +
+                    LocalizationModule.translate(Keys.MMCS_VERSION) +
                     Defs.PluginInfo.PLUGIN_VERSION
                 );
                 default -> sender.sendMessage(

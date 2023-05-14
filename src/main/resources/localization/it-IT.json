@@ -14,5 +14,8 @@
   "command_reloading_success": "Ricaricamento Plugin Riuscito: ",
   "command_reloading_fail": "Ricaricamento Plugin Fallito: ",
   "command_module_not_loaded": "Impossibile eseguire il comando: il modulo dei comandi non è stato caricato.",
-  "command_missing_permissions": "Impossibile eseguire il comando: permessi non sufficienti."
+  "command_missing_permissions": "Impossibile eseguire il comando: permessi non sufficienti.",
+  "dependant_module_are_on": "Impossibile eseguire il comando: altri moduli dipendenti da questo sono caricati",
+  "dependencies_module_are_off": "Impossibile eseguire il comando: alcuni moduli necessari non sono caricati",
+  "command_reloading_module_is_off": "Impossibile eseguire il comando: questo modulo non è caricato"
 }
