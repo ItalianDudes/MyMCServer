@@ -3,7 +3,8 @@ package it.italiandudes.mymcserver.modules.connection;
 import it.italiandudes.mymcserver.utils.Defs;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 @SuppressWarnings("unused")
 public final class ProtocolExecutionQueue {
