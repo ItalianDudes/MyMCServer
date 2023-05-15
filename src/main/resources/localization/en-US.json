@@ -15,7 +15,8 @@
   "command_reloading_fail": "Reloading Module Failed: ",
   "command_module_not_loaded": "Can't execute the command: the commands module isn't loaded.",
   "command_missing_permissions": "Can't execute the command: insufficient permissions.",
-  "dependant_module_are_on": "Can't execute the command: other modules depending on this are on, unload them first",
-  "dependencies_module_are_off": "Can't execute the command: other required modules are off, load them first",
-  "command_reloading_module_is_off": "Can't execute the command: this module is off, load it first"
+  "dependant_module_are_on": "Can't execute the command: other modules depending on this are on, unload them first.",
+  "dependencies_module_are_off": "Can't execute the command: other required modules are off, load them first.",
+  "command_reloading_module_is_off": "Can't execute the command: this module is off, load it first.",
+  "command_insufficient_parameters": "Can't execute the command: the provided arguments are insufficient."
 }
