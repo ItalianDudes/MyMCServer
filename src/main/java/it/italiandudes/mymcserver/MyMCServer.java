@@ -12,13 +12,14 @@ import it.italiandudes.mymcserver.modules.connection.ConnectionModule;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Resource;
 import it.italiandudes.mymcserver.utils.ServerLogger;
+import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 public final class MyMCServer extends JavaPlugin {
 
     // Attributes
@@ -41,19 +42,21 @@ public final class MyMCServer extends JavaPlugin {
             // Load Langs from Config's selected Lang
             loadLangs(this);
 
-            // Load the DBConnection module using configs
-            loadDB();
+            // Load Commands
+            CommandsModule.load(this);
 
             ServerLogger.getLogger().info("All core modules are loaded, loading plugin modules...");
 
-            // Load Commands
-            CommandsModule.load(this);
+            // Load the DBConnection module using configs
+            loadDB();
 
             // Load Connection using DBConnection and configs
             loadConnection();
 
+            ServerLogger.getLogger().info(ChatColor.AQUA +"All modules are loaded, plugin fully operational");
+
         }catch (Exception e) {
-            ServerLogger.getLogger().severe("An unhandled exception has reached the function, shutting down the plugin...");
+            ServerLogger.getLogger().severe("An unhandled exception has reached the top of the stack, shutting down the plugin...");
             ServerLogger.getLogger().severe("Exception stacktrace:");
             ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
             onDisable();
@@ -68,18 +71,23 @@ public final class MyMCServer extends JavaPlugin {
         try {
             ConnectionModule.unload(true);
         } catch (ModuleException ignored) {}
+        ServerLogger.getLogger().info(ChatColor.AQUA+ "Connection Module Unload: Successful!");
+        try {
+            DBConnectionModule.unload(true);
+        } catch (ModuleException ignored) {}
+        ServerLogger.getLogger().info(ChatColor.AQUA+ "DB Connection Module Unload: Successful!");
         try {
             CommandsModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info("DB Connection Module Unload: Successful!");
+        ServerLogger.getLogger().info(ChatColor.AQUA+ "Commands Module Unload: Successful!");
         try {
             LocalizationModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info("Localization Module Unload: Successful!");
+        ServerLogger.getLogger().info(ChatColor.AQUA+ "Localization Module Unload: Successful!");
         try {
             ConfigModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info("Config Module Unload: Successful!");
+        ServerLogger.getLogger().info(ChatColor.AQUA+ "Config Module Unload: Successful!");
     }
 
     // Instance Getter

@@ -43,7 +43,15 @@ public final class MMCSReloadCommand implements CommandExecutor {
             }catch (ModuleException ignored) {}
             return true;
         }
-        if (args.length < 1) return false;
+        if (args.length < 1) {
+            try {
+                sender.sendMessage(
+                    ChatColor.RED +
+                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_INSUFFICIENT_PARAMETERS)
+                );
+            }catch (ModuleException ignored) {}
+            return true;
+        }
 
         boolean commandError = false;
         for (int i = 0; i< args.length && !commandError; i++) {

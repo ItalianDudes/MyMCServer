@@ -2,7 +2,10 @@ package it.italiandudes.mymcserver.commands;
 
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.modules.CommandsModule;
+import it.italiandudes.mymcserver.modules.ConfigModule;
+import it.italiandudes.mymcserver.modules.DBConnectionModule;
 import it.italiandudes.mymcserver.modules.LocalizationModule;
+import it.italiandudes.mymcserver.modules.connection.ConnectionModule;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Localization.Keys;
 import org.bukkit.ChatColor;
@@ -22,6 +25,7 @@ public final class MyMCServerCommand implements CommandExecutor {
     public static final class Arguments {
         public static final String INFO = "info";
         public static final String VERSION = "version";
+        public static final String MODULE_STATUS = "modstats";
     }
 
     // Command Body
@@ -45,11 +49,41 @@ public final class MyMCServerCommand implements CommandExecutor {
                         ChatColor.AQUA +
                         LocalizationModule.translate(Keys.MMCS_INFO)
                 );
+
                 case Arguments.VERSION -> sender.sendMessage(
                     ChatColor.AQUA +
                     LocalizationModule.translate(Keys.MMCS_VERSION) +
                     Defs.PluginInfo.PLUGIN_VERSION
                 );
+
+                case Arguments.MODULE_STATUS -> {
+                    sender.sendMessage(
+                        ChatColor.AQUA +
+                        Defs.ModuleNames.MODULE_CONFIG +
+                        ": "+(ConfigModule.isModuleLoaded()?"ONLINE":"OFFLINE")
+                    );
+                    sender.sendMessage(
+                        ChatColor.AQUA +
+                        Defs.ModuleNames.MODULE_LOCALIZATION +
+                        ": "+(LocalizationModule.isModuleLoaded()?"ONLINE":"OFFLINE")
+                    );
+                    sender.sendMessage(
+                        ChatColor.AQUA +
+                        Defs.ModuleNames.MODULE_DBCONNECTION +
+                        ": "+(DBConnectionModule.isModuleLoaded()?"ONLINE":"OFFLINE")
+                    );
+                    sender.sendMessage(
+                        ChatColor.AQUA +
+                        Defs.ModuleNames.MODULE_COMMANDS +
+                        ": "+(CommandsModule.isModuleLoaded()?"ONLINE":"OFFLINE")
+                    );
+                    sender.sendMessage(
+                        ChatColor.AQUA +
+                        Defs.ModuleNames.MODULE_CONNECTION +
+                        ": "+(ConnectionModule.isModuleLoaded()?"ONLINE":"OFFLINE")
+                    );
+                }
+
                 default -> sender.sendMessage(
                     ChatColor.RED +
                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_SYNTAX_ERROR)
