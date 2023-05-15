@@ -17,12 +17,12 @@ public final class ExecutablePlugin {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Inserire indirizzo server (indirizzo:porta): ");
+        System.out.print("Insert server address (indirizzo:porta): ");
         String serverAddress = scan.nextLine();
         String[] splitAddress = serverAddress.split(":");
-        System.out.print("Inserire nome utente: ");
+        System.out.print("Insert username: ");
         String username = scan.nextLine();
-        System.out.print("Inserire password: ");
+        System.out.print("Insert password: ");
         String password = scan.nextLine();
         Credential credentials = new Credential(username, password);
 
@@ -43,7 +43,7 @@ public final class ExecutablePlugin {
 
             while (true) {
                 buffer = scan.nextLine();
-                if (buffer.equalsIgnoreCase("exit")) {
+                if (buffer.equalsIgnoreCase(Defs.ExecutablePlugin.ServerConsole.SERVER_CONSOLE_EXIT)) {
                     PeerSerializer.sendString(peer, Defs.Protocol.PROTOCOL_DISCONNECT);
                     break;
                 }
