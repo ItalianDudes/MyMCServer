@@ -94,7 +94,7 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_CONNECTION -> {
-                        if (!DBConnectionModule.isModuleLoaded()) {
+                        if (!ConnectionModule.isModuleLoaded()) {
                             sender.sendMessage(
                                 ChatColor.RED +
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
@@ -140,7 +140,7 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_LOCALIZATION -> {
-                        if (!DBConnectionModule.isModuleLoaded()) {
+                        if (!LocalizationModule.isModuleLoaded()) {
                             sender.sendMessage(
                                     ChatColor.RED +
                                             LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
@@ -176,7 +176,7 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_CONFIG -> {
-                        if (!DBConnectionModule.isModuleLoaded()) {
+                        if (!ConfigModule.isModuleLoaded()) {
                             sender.sendMessage(
                                 ChatColor.RED +
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
@@ -205,7 +205,7 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     }
 
                     case Defs.ModuleNames.MODULE_COMMANDS -> {
-                        if (!DBConnectionModule.isModuleLoaded()) {
+                        if (!CommandsModule.isModuleLoaded()) {
                             sender.sendMessage(
                                 ChatColor.RED +
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
