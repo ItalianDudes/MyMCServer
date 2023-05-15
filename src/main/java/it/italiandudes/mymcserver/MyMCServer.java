@@ -53,7 +53,7 @@ public final class MyMCServer extends JavaPlugin {
             // Load Connection using DBConnection and configs
             loadConnection();
 
-            ServerLogger.getLogger().info(ChatColor.AQUA +"All modules are loaded, plugin fully operational");
+            ServerLogger.getLogger().info("All modules are loaded, plugin fully operational");
 
         }catch (Exception e) {
             ServerLogger.getLogger().severe("An unhandled exception has reached the top of the stack, shutting down the plugin...");
@@ -71,23 +71,23 @@ public final class MyMCServer extends JavaPlugin {
         try {
             ConnectionModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info(ChatColor.AQUA+ "Connection Module Unload: Successful!");
+        ServerLogger.getLogger().info("Connection Module Unload: Successful!");
         try {
             DBConnectionModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info(ChatColor.AQUA+ "DB Connection Module Unload: Successful!");
+        ServerLogger.getLogger().info("DB Connection Module Unload: Successful!");
         try {
             CommandsModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info(ChatColor.AQUA+ "Commands Module Unload: Successful!");
+        ServerLogger.getLogger().info("Commands Module Unload: Successful!");
         try {
             LocalizationModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info(ChatColor.AQUA+ "Localization Module Unload: Successful!");
+        ServerLogger.getLogger().info("Localization Module Unload: Successful!");
         try {
             ConfigModule.unload(true);
         } catch (ModuleException ignored) {}
-        ServerLogger.getLogger().info(ChatColor.AQUA+ "Config Module Unload: Successful!");
+        ServerLogger.getLogger().info("Config Module Unload: Successful!");
     }
 
     // Instance Getter
