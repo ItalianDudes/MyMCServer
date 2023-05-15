@@ -63,8 +63,8 @@ public final class Defs {
         // Lang Keys
         public static final class Keys {
             public static final String TEST_ENTRY = "test_entry";
-            public static final String MMCS_VERSION = "ee_version";
-            public static final String MMCS_INFO = "ee_info";
+            public static final String MMCS_VERSION = "mmcs_version";
+            public static final String MMCS_INFO = "mmcs_info";
             public static final String COMMAND_EXECUTION_ERROR = "command_execution_error";
             public static final String COMMAND_SYNTAX_ERROR = "command_syntax_error";
             public static final String COMMAND_LOADING_STARTED = "command_loading_started";
@@ -81,6 +81,7 @@ public final class Defs {
             public static final String COMMAND_UNLOADING_DEPENDANT_ARE_ON = "dependant_module_are_on";
             public static final String COMMAND_LOADING_DEPENDENCIES_ARE_OFF = "dependencies_module_are_off";
             public static final String COMMAND_RELOADING_MODULE_IS_OFF = "command_reloading_module_is_off";
+            public static final String COMMAND_INSUFFICIENT_PARAMETERS = "command_insufficient_parameters";
         }
     }
 
@@ -111,5 +112,12 @@ public final class Defs {
         public static final String PROTOCOL_COMMAND = "command";
         public static final String PROTOCOL_SSH = "ssh";
         public static final String PROTOCOL_DISCONNECT = "disconnect";
+    }
+
+    // Executable Plugin
+    public static final class ExecutablePlugin {
+        public static final class ServerConsole {
+            public static final String SERVER_CONSOLE_EXIT = "exit";
+        }
     }
 }
