@@ -19,6 +19,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("unused")
 public final class ConfigModule {
@@ -72,7 +73,7 @@ public final class ConfigModule {
         // General Config File
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader(pluginInstance.getDataFolder().getAbsolutePath()+Resource.Path.Config.GENERAL_CONFIG);
+            fileReader = new FileReader(pluginInstance.getDataFolder().getAbsolutePath()+Resource.Path.Config.GENERAL_CONFIG, StandardCharsets.UTF_8);
             generalConfigFile = (JSONObject) new JSONParser().parse(fileReader);
             fileReader.close();
         } catch (IOException | ParseException e) {

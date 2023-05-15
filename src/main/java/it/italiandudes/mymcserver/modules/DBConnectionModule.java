@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public final class DBConnectionModule {
 
         StringBuilder queryBuilder = new StringBuilder();
 
-        Scanner queryReader = new Scanner(inStream);
+        Scanner queryReader = new Scanner(inStream, StandardCharsets.UTF_8);
         while(queryReader.hasNext()) {
             queryBuilder.append(queryReader.nextLine()).append('\n');
         }
