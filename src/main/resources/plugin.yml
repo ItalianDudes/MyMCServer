@@ -1,9 +1,9 @@
 name: MyMCServer
-version: '0.0.1A'
+version: '0.9.4A'
 author: Hacker6329
 prefix: MyMCServer
 main: it.italiandudes.mymcserver.MyMCServer
-description: mymcserver
+description: A minecraft plugin that allows you to have real-time information on a minecraft server and to send commands via chat.
 load: POSTWORLD
 api-version: 1.19
 libraries:
