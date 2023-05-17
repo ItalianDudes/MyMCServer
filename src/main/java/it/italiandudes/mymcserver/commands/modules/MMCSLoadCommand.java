@@ -6,7 +6,7 @@ import it.italiandudes.mymcserver.modules.CommandsModule;
 import it.italiandudes.mymcserver.modules.ConfigModule;
 import it.italiandudes.mymcserver.modules.DBConnectionModule;
 import it.italiandudes.mymcserver.modules.LocalizationModule;
-import it.italiandudes.mymcserver.modules.connection.ConnectionModule;
+import it.italiandudes.mymcserver.modules.ConnectionModule;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Localization.Keys;
 import org.bukkit.ChatColor;
