@@ -82,6 +82,12 @@ public final class Defs {
             public static final String COMMAND_LOADING_DEPENDENCIES_ARE_OFF = "dependencies_module_are_off";
             public static final String COMMAND_RELOADING_MODULE_IS_OFF = "command_reloading_module_is_off";
             public static final String COMMAND_INSUFFICIENT_PARAMETERS = "command_insufficient_parameters";
+            public static final String CONNECTION_RESPONSE_MESSAGE_BAD_REQUEST = "connection_response_message_bad_request";
+            public static final String CONNECTION_RESPONSE_MESSAGE_UNAUTHORIZED = "connection_response_message_unauthorized";
+            public static final String CONNECTION_RESPONSE_MESSAGE_FORBIDDEN = "connection_response_message_forbidden";
+            public static final String CONNECTION_RESPONSE_MESSAGE_NOT_FOUND = "connection_response_message_not_found";
+            public static final String CONNECTION_RESPONSE_MESSAGE_INTERNAL_SERVER_ERROR = "connection_response_message_internal_server_error";
+            public static final String CONNECTION_RESPONSE_MESSAGE_LOGIN_SUCCESS = "connection_response_message_login_success";
         }
     }
 
@@ -102,6 +108,50 @@ public final class Defs {
         public static final String MMCS_UNLOAD = "mmcsunload";
         public static final String MMCS_RELOAD = "mmcsreload";
         public static final String[] COMMAND_NAME = {"mymcserver", "mmcs"};
+    }
+
+    // Connection Constants
+    public static final class Connection {
+        public static final int BACKLOG = 5;
+        public static final int STOP_DELAY_SECONDS = 5;
+        public static final class Context {
+            private static final String CONTEXT_ROOT = "/";
+            public static final String CONTEXT_COMMAND = CONTEXT_ROOT + "command";
+            public static final String CONTEXT_STATS = CONTEXT_ROOT + "stats";
+            public static final String CONTEXT_LOGIN = CONTEXT_ROOT + "login";
+        }
+        public static final class ReturnCode {
+            public static final int OK = 200;
+            public static final int BAD_REQUEST = 400;
+            public static final int UNAUTHORIZED = 401;
+            public static final int FORBIDDEN = 403;
+            public static final int NOT_FOUND = 404;
+            public static final int INTERNAL_SERVER_ERROR = 500;
+        }
+        public static final class JSONContent {
+            public static final String RETURN_CODE = "return-code";
+            public static final String TOKEN = "token";
+            public static final String MESSAGE = "message";
+            public static final String CPU_PERC = "cpu-perc";
+            public static final String MAX_MEMORY = "max-memory";
+            public static final String USED_MEMORY = "used-memory";
+            public static final String PLAYER_LIST = "player-list";
+            public static final String ADDONS_LIST = "addons-list";
+            public static final class PlayerList {
+                public static final String NAME = "name";
+                public static final String ONLINE = "online";
+            }
+            public static final class AddonsList {
+                public static final String NAME = "name";
+                public static final String ENABLED = "enabled";
+            }
+        }
+        public static final class Header {
+            public static final String HEADER_USERNAME = "MMCS-Username";
+            public static final String HEADER_PASSWORD = "MMCS-Password";
+            public static final String HEADER_TOKEN = "MMCS-Token";
+            public static final String HEADER_COMMAND = "MMCS-Command";
+        }
     }
 
     // Protocol
