@@ -18,5 +18,11 @@
   "dependant_module_are_on": "Impossibile eseguire il comando: altri moduli dipendenti da questo sono caricati.",
   "dependencies_module_are_off": "Impossibile eseguire il comando: alcuni moduli necessari non sono caricati.",
   "command_reloading_module_is_off": "Impossibile eseguire il comando: questo modulo non è caricato.",
-  "command_insufficient_parameters": "Impossibile eseguire il comando: parametri insufficienti."
+  "command_insufficient_parameters": "Impossibile eseguire il comando: parametri insufficienti.",
+  "connection_response_message_bad_request": "La richiesta è compilata male",
+  "connection_response_message_unauthorized": "Manca username e password o il token",
+  "connection_response_message_forbidden": "Non sei autorizzato a vedere questa risorsa",
+  "connection_response_message_not_found": "La risorsa richiesta non è stata trovata",
+  "connection_response_message_login_success": "Login effettuato con successo!",
+  "connection_response_message_internal_server_error": "Si è verificato un errore lato server"
 }
