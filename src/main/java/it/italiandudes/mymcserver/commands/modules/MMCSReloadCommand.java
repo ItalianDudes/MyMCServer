@@ -2,11 +2,7 @@ package it.italiandudes.mymcserver.commands.modules;
 
 import it.italiandudes.mymcserver.MyMCServer;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
-import it.italiandudes.mymcserver.modules.CommandsModule;
-import it.italiandudes.mymcserver.modules.ConfigModule;
-import it.italiandudes.mymcserver.modules.DBConnectionModule;
-import it.italiandudes.mymcserver.modules.LocalizationModule;
-import it.italiandudes.mymcserver.modules.ConnectionModule;
+import it.italiandudes.mymcserver.modules.*;
 import it.italiandudes.mymcserver.utils.Defs;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

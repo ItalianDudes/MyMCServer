@@ -3,11 +3,11 @@ package it.italiandudes.mymcserver.modules.httphandlers;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import it.italiandudes.mymcserver.modules.LocalizationModule;
-import it.italiandudes.mymcserver.utils.Defs.Connection.JSONContent;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.modules.ConnectionModule;
+import it.italiandudes.mymcserver.modules.LocalizationModule;
 import it.italiandudes.mymcserver.utils.Defs;
+import it.italiandudes.mymcserver.utils.Defs.Connection.JSONContent;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 
