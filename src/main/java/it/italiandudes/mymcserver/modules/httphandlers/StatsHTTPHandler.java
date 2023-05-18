@@ -13,7 +13,7 @@ public final class StatsHTTPHandler implements HttpHandler {
     public static final String CONTEXT = Defs.Connection.Context.CONTEXT_STATS;
 
     // Handler
-    @Override
+    @Override @SuppressWarnings({"unchecked", "DuplicatedCode"})
     public void handle(HttpExchange exchange) throws IOException {
 
     }
