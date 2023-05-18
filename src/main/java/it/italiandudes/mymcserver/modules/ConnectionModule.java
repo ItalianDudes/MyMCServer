@@ -207,6 +207,37 @@ public final class ConnectionModule {
         }
         return object;
     }
+    public static String getUserByToken(@NotNull final String token) {
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        try {
+            String query = "SELECT username FROM remote_users WHERE token=?";
+            preparedStatement = DBConnectionModule.getPreparedStatement(query);
+            preparedStatement.setString(1, token);
+            result = preparedStatement.executeQuery();
+            int count = 0;
+            String username = null;
+            while (result.next()) {
+                count++;
+                username = result.getString("username");
+            }
+            result.close();
+            preparedStatement.close();
+            if (count < 0 || count > 1) { // How is even possible that a token can have multiple users or count be less than 0?
+                throw new SQLException("How is even possible that a token can have multiple users?");
+            }
+            return username;
+        } catch (ModuleException | SQLException e) {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (Exception ignored) {}
+            try {
+                if (result != null) result.close();
+            } catch (Exception ignored) {}
+            ServerLogger.getLogger().severe("ERROR: DATABASE SELECT FAILED!");
+            return null;
+        }
+    }
     public static String getUserToken(@NotNull final String username, @NotNull final String sha512password) {
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
