@@ -21,7 +21,7 @@ public class LoginHTTPHandler implements HttpHandler {
     public static final String CONTEXT = Defs.Connection.Context.CONTEXT_LOGIN;
 
     // Handler
-    @SuppressWarnings("unchecked") @Override
+    @Override @SuppressWarnings({"unchecked", "DuplicatedCode"})
     public void handle(@NotNull final HttpExchange exchange) throws IOException {
 
         // Get Headers
@@ -47,7 +47,7 @@ public class LoginHTTPHandler implements HttpHandler {
         // Getting the token if the authentication succeed
         String token = ConnectionModule.getUserToken(username, sha512password);
 
-        if (token == null) {
+        if (token == null) { // The authentication failed
             ConnectionModule.CommonResponse.sendForbidden(exchange);
             exchange.close();
             return;
