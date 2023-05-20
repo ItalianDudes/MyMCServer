@@ -23,5 +23,15 @@
   "connection_response_message_unauthorized": "Username and password or token not provided",
   "connection_response_message_forbidden": "You're not authorized to do this request",
   "connection_response_message_not_found": "The requested resource wasn't found",
-  "connection_response_message_internal_server_error": "An error has occurred on server side"
+  "connection_response_message_internal_server_error": "An error has occurred on server side",
+  "command_password_mismatch": "",
+  "command_remote_enable_started": "",
+  "command_remote_enable_success": "",
+  "command_remote_enable_fail": "",
+  "command_remote_disable_started": "",
+  "command_remote_disable_success": "",
+  "command_remote_disable_fail": "",
+  "command_remote_edit_started": "",
+  "command_remote_edit_success": "",
+  "command_remote_edit_fail": ""
 }
