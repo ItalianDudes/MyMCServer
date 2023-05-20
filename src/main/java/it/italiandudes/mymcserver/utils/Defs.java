@@ -87,7 +87,6 @@ public final class Defs {
             public static final String CONNECTION_RESPONSE_MESSAGE_FORBIDDEN = "connection_response_message_forbidden";
             public static final String CONNECTION_RESPONSE_MESSAGE_NOT_FOUND = "connection_response_message_not_found";
             public static final String CONNECTION_RESPONSE_MESSAGE_INTERNAL_SERVER_ERROR = "connection_response_message_internal_server_error";
-            public static final String CONNECTION_RESPONSE_MESSAGE_LOGIN_SUCCESS = "connection_response_message_login_success";
         }
     }
 

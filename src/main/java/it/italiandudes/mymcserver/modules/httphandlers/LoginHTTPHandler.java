@@ -3,9 +3,7 @@ package it.italiandudes.mymcserver.modules.httphandlers;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.modules.ConnectionModule;
-import it.italiandudes.mymcserver.modules.LocalizationModule;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Connection.JSONContent;
 import org.jetbrains.annotations.NotNull;
@@ -53,16 +51,11 @@ public class LoginHTTPHandler implements HttpHandler {
             return;
         }
 
-        // Send the response with the token
-        try {
-            JSONObject response = new JSONObject();
-            response.put(JSONContent.RETURN_CODE, Defs.Connection.ReturnCode.OK);
-            response.put(JSONContent.MESSAGE, LocalizationModule.translate(Defs.Localization.Keys.CONNECTION_RESPONSE_MESSAGE_LOGIN_SUCCESS));
-            response.put(JSONContent.TOKEN, token);
-            ConnectionModule.sendHTTPResponse(exchange, response);
-        } catch (ModuleException e) {
-            ConnectionModule.CommonResponse.sendInternalServerError(exchange);
-        }
+        // Send the response
+        JSONObject response = new JSONObject();
+        response.put(JSONContent.RETURN_CODE, Defs.Connection.ReturnCode.OK);
+        response.put(JSONContent.TOKEN, token);
+        ConnectionModule.sendHTTPResponse(exchange, response);
 
         // Finishing the transaction
         exchange.close();

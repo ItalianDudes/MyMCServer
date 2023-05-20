@@ -23,6 +23,5 @@
   "connection_response_message_unauthorized": "Manca username e password o il token",
   "connection_response_message_forbidden": "Non sei autorizzato a vedere questa risorsa",
   "connection_response_message_not_found": "La risorsa richiesta non è stata trovata",
-  "connection_response_message_login_success": "Login effettuato con successo!",
   "connection_response_message_internal_server_error": "Si è verificato un errore lato server"
 }
