@@ -77,10 +77,10 @@ public final class CommandHTTPHandler implements HttpHandler {
             outStream.close();
         }catch (Exception ignored) {}
 
-        // Send the response with the token
+        // Send the response
         JSONObject response = new JSONObject();
         response.put(Defs.Connection.JSONContent.RETURN_CODE, Defs.Connection.ReturnCode.OK);
-        response.put(Defs.Connection.JSONContent.MESSAGE, commandOutput);
+        response.put(Defs.Connection.JSONContent.COMMAND_OUTPUT, commandOutput);
         ConnectionModule.sendHTTPResponse(exchange, response);
 
         // Finishing the transaction

@@ -132,9 +132,12 @@ public final class Defs {
             public static final String RETURN_CODE = "return-code";
             public static final String TOKEN = "token";
             public static final String MESSAGE = "message";
-            public static final String CPU_PERC = "cpu-perc";
-            public static final String MAX_MEMORY = "max-memory";
-            public static final String USED_MEMORY = "used-memory";
+            public static final String COMMAND_OUTPUT = "command-output";
+            public static final String SYSTEM_CPU_LOAD = "system-cpu-load";
+            public static final String PROCESS_CPU_LOAD = "process-cpu-load";
+            public static final String TOTAL_MEMORY = "total-memory";
+            public static final String FREE_MEMORY = "free-memory";
+            public static final String COMMITTED_VIRTUAL_MEMORY = "committed-virtual-memory";
             public static final String PLAYER_LIST = "player-list";
             public static final String ADDONS_LIST = "addons-list";
             public static final class PlayerList {
