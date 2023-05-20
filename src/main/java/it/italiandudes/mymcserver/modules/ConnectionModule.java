@@ -8,6 +8,7 @@ import it.italiandudes.mymcserver.exceptions.modules.*;
 import it.italiandudes.mymcserver.modules.httphandlers.CommandHTTPHandler;
 import it.italiandudes.mymcserver.modules.httphandlers.LoginHTTPHandler;
 import it.italiandudes.mymcserver.modules.httphandlers.StatsHTTPHandler;
+import it.italiandudes.mymcserver.modules.httphandlers.remote.RemoteUser;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Connection.JSONContent;
 import it.italiandudes.mymcserver.utils.Defs.Connection.ReturnCode;
@@ -207,26 +208,39 @@ public final class ConnectionModule {
         }
         return object;
     }
-    public static String getUserByToken(@NotNull final String token) {
+    public static RemoteUser generateRemoteUser(@NotNull final String username, @NotNull final String sha512password) {
+        long newExpirationDateEpoch = Instant.now().plus(1, ChronoUnit.MONTHS).toEpochMilli();
+        Random random = new Random();
+        String rawToken = Math.abs(random.nextInt()) + '@' +username + '@' + newExpirationDateEpoch + '@' + sha512password + '@' + Math.abs(random.nextInt());
+        String newToken = DigestUtils.sha512Hex(rawToken);
+        return new RemoteUser(username, sha512password, newToken, new Date(newExpirationDateEpoch));
+    }
+    public static RemoteUser getUserByToken(@NotNull final String token) {
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         try {
-            String query = "SELECT username FROM remote_users WHERE token=?";
+            String query = "SELECT user_id, username, sha512password, token_expiration_date FROM remote_users WHERE token=?";
             preparedStatement = DBConnectionModule.getPreparedStatement(query);
             preparedStatement.setString(1, token);
             result = preparedStatement.executeQuery();
             int count = 0;
             String username = null;
+            String sha512password = null;
+            Integer userID = null;
+            Date expirationDate = null;
             while (result.next()) {
                 count++;
                 username = result.getString("username");
+                sha512password = result.getString("sha512password");
+                userID = result.getInt("user_id");
+                expirationDate = result.getDate("token_expiration_date");
             }
             result.close();
             preparedStatement.close();
-            if (count < 0 || count > 1) { // How is even possible that a token can have multiple users or count be less than 0?
+            if (count < 0 || count > 1 || userID == null || username == null || sha512password == null || expirationDate == null) { // How is even possible that a token can have multiple users or count be less than 0?
                 throw new SQLException("How is even possible that a token can have multiple users?");
             }
-            return username;
+            return new RemoteUser(userID, username, sha512password, token, expirationDate);
         } catch (ModuleException | SQLException e) {
             try {
                 if (preparedStatement != null) preparedStatement.close();
@@ -237,6 +251,9 @@ public final class ConnectionModule {
             ServerLogger.getLogger().severe("ERROR: DATABASE SELECT FAILED!");
             return null;
         }
+    }
+    public static String getUserToken(@NotNull final RemoteUser remoteUser) {
+        return getUserToken(remoteUser.getUsername(), remoteUser.getSha512password());
     }
     public static String getUserToken(@NotNull final String username, @NotNull final String sha512password) {
         PreparedStatement preparedStatement = null;
