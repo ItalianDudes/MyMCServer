@@ -5,6 +5,7 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import it.italiandudes.mymcserver.modules.ConnectionModule;
+import it.italiandudes.mymcserver.modules.httphandlers.remote.RemoteUser;
 import it.italiandudes.mymcserver.modules.httphandlers.stats.PlayerDescriptor;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Connection.JSONContent;
@@ -47,9 +48,9 @@ public final class StatsHTTPHandler implements HttpHandler {
         // Getting required data
         String token = tokenHeader.get(0);
 
-        // Getting the username from the token
-        String username = ConnectionModule.getUserByToken(token);
-        if (username == null) {
+        // Getting the username from the token, to validate if the user exist
+        RemoteUser remoteUser = ConnectionModule.getUserByToken(token);
+        if (remoteUser == null) {
             ConnectionModule.CommonResponse.sendInternalServerError(exchange);
             exchange.close();
             return;
