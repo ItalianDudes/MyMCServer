@@ -7,8 +7,8 @@ import com.sun.net.httpserver.HttpHandler;
 import it.italiandudes.mymcserver.modules.ConnectionModule;
 import it.italiandudes.mymcserver.modules.httphandlers.stats.PlayerDescriptor;
 import it.italiandudes.mymcserver.utils.Defs;
-import it.italiandudes.mymcserver.utils.Defs.Connection.ReturnCode;
 import it.italiandudes.mymcserver.utils.Defs.Connection.JSONContent;
+import it.italiandudes.mymcserver.utils.Defs.Connection.ReturnCode;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -18,7 +18,9 @@ import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public final class StatsHTTPHandler implements HttpHandler {
