@@ -6,6 +6,7 @@ import it.italiandudes.mymcserver.commands.MyMCServerCommand;
 import it.italiandudes.mymcserver.commands.modules.MMCSLoadCommand;
 import it.italiandudes.mymcserver.commands.modules.MMCSReloadCommand;
 import it.italiandudes.mymcserver.commands.modules.MMCSUnloadCommand;
+import it.italiandudes.mymcserver.commands.remote.MMCSRemoteCommand;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.exceptions.modules.ModuleAlreadyLoadedException;
 import it.italiandudes.mymcserver.exceptions.modules.ModuleLoadingException;
@@ -68,10 +69,11 @@ public final class CommandsModule {
 
         // List of commands here...
         try {
-            registerCommand(MyMCServer.getPluginInstance(), MyMCServerCommand.COMMAND_NAME, new MyMCServerCommand());
-            registerCommand(MyMCServer.getPluginInstance(), MMCSLoadCommand.COMMAND_NAME, new MMCSLoadCommand());
-            registerCommand(MyMCServer.getPluginInstance(), MMCSUnloadCommand.COMMAND_NAME, new MMCSUnloadCommand());
-            registerCommand(MyMCServer.getPluginInstance(), MMCSReloadCommand.COMMAND_NAME, new MMCSReloadCommand());
+            registerCommand(MyMCServerCommand.COMMAND_NAME, new MyMCServerCommand());
+            registerCommand(MMCSLoadCommand.COMMAND_NAME, new MMCSLoadCommand());
+            registerCommand(MMCSUnloadCommand.COMMAND_NAME, new MMCSUnloadCommand());
+            registerCommand(MMCSReloadCommand.COMMAND_NAME, new MMCSReloadCommand());
+            registerCommand(MMCSRemoteCommand.COMMAND_NAME, new MMCSRemoteCommand());
         } catch (Exception e) {
             areCommandsLoading = false;
             if (!disableLog) ServerLogger.getLogger().severe("Commands Module Load: Failed! (Reason: an error has occurred on module loading)");
@@ -81,9 +83,6 @@ public final class CommandsModule {
         areCommandsLoading = false;
         isModuleLoaded = true;
         if (!disableLog) ServerLogger.getLogger().info("Commands Module Load: Successful!");
-    }
-    private synchronized static void registerCommand(@NotNull final JavaPlugin PLUGIN_INSTANCE, @NotNull final String COMMAND_NAME, @NotNull final CommandExecutor COMMAND) {
-        Objects.requireNonNull(PLUGIN_INSTANCE.getCommand(COMMAND_NAME)).setExecutor(COMMAND);
     }
     public synchronized static void unload() throws ModuleException {
         unload(false);
@@ -140,6 +139,9 @@ public final class CommandsModule {
             ServerLogger.getLogger().severe(err);
             if (e != null) ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
         } catch (Exception ignored) {}
+    }
+    private synchronized static void registerCommand(@NotNull final String COMMAND_NAME, @NotNull final CommandExecutor COMMAND) {
+        Objects.requireNonNull(MyMCServer.getPluginInstance().getCommand(COMMAND_NAME)).setExecutor(COMMAND);
     }
 
     // Fake player to get the output of the command
