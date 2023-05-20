@@ -209,7 +209,7 @@ public final class ConnectionModule {
         return object;
     }
     public static RemoteUser generateRemoteUser(@NotNull final String username, @NotNull final String sha512password) {
-        long newExpirationDateEpoch = Instant.now().plus(1, ChronoUnit.MONTHS).toEpochMilli();
+        long newExpirationDateEpoch = Instant.now().plus(7, ChronoUnit.DAYS).toEpochMilli();
         Random random = new Random();
         String rawToken = Math.abs(random.nextInt()) + '@' +username + '@' + newExpirationDateEpoch + '@' + sha512password + '@' + Math.abs(random.nextInt());
         String newToken = DigestUtils.sha512Hex(rawToken);
@@ -277,7 +277,7 @@ public final class ConnectionModule {
             String newToken;
             Instant now = Instant.now();
             if (expirationDate.after(new Date(now.plus(1, ChronoUnit.DAYS).toEpochMilli()))) {
-                long newExpirationDateEpoch = now.plus(1, ChronoUnit.MONTHS).toEpochMilli();
+                long newExpirationDateEpoch = now.plus(7, ChronoUnit.DAYS).toEpochMilli();
                 Random random = new Random();
                 String rawToken = Math.abs(random.nextInt()) + '@' +username + '@' + newExpirationDateEpoch + '@' + sha512password + '@' + Math.abs(random.nextInt());
                 newToken = DigestUtils.sha512Hex(rawToken);

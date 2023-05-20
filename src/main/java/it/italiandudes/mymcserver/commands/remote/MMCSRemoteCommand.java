@@ -67,7 +67,7 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                     ChatColor.AQUA +
                                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_STARTED)
                                 );
-                                if (args[1].equals(args[2])) { // Password mismatch
+                                if (!args[1].equals(args[2])) { // Password mismatch
                                     sender.sendMessage(
                                         ChatColor.RED +
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
@@ -140,7 +140,7 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                     ChatColor.AQUA +
                                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_STARTED)
                                 );
-                                if (args[2].equals(args[3])) {
+                                if (!args[2].equals(args[3])) {
                                     sender.sendMessage(
                                         ChatColor.RED +
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
@@ -188,7 +188,7 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                     ChatColor.AQUA +
                                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_STARTED)
                                 );
-                                if (args[2].equals(args[3])) { // Password mismatch
+                                if (!args[2].equals(args[3])) { // Password mismatch
                                     sender.sendMessage(
                                         ChatColor.RED +
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
@@ -261,7 +261,7 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                     ChatColor.AQUA +
                                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_STARTED)
                                 );
-                                if (args[3].equals(args[4])) {
+                                if (!args[3].equals(args[4])) {
                                     sender.sendMessage(
                                         ChatColor.RED +
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
