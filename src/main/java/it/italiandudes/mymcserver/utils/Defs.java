@@ -87,6 +87,16 @@ public final class Defs {
             public static final String CONNECTION_RESPONSE_MESSAGE_FORBIDDEN = "connection_response_message_forbidden";
             public static final String CONNECTION_RESPONSE_MESSAGE_NOT_FOUND = "connection_response_message_not_found";
             public static final String CONNECTION_RESPONSE_MESSAGE_INTERNAL_SERVER_ERROR = "connection_response_message_internal_server_error";
+            public static final String COMMAND_REMOTE_ENABLE_STARTED = "command_remote_enable_started";
+            public static final String COMMAND_REMOTE_ENABLE_SUCCESS = "command_remote_enable_success";
+            public static final String COMMAND_REMOTE_ENABLE_FAIL = "command_remote_enable_fail";
+            public static final String COMMAND_REMOTE_DISABLE_STARTED = "command_remote_disable_started";
+            public static final String COMMAND_REMOTE_DISABLE_SUCCESS = "command_remote_disable_success";
+            public static final String COMMAND_REMOTE_DISABLE_FAIL = "command_remote_disable_fail";
+            public static final String COMMAND_REMOTE_EDIT_STARTED = "command_remote_edit_started";
+            public static final String COMMAND_REMOTE_EDIT_SUCCESS = "command_remote_edit_success";
+            public static final String COMMAND_REMOTE_EDIT_FAIL = "command_remote_edit_fail";
+            public static final String COMMAND_PASSWORD_MISMATCH = "command_password_mismatch";
         }
     }
 
@@ -107,6 +117,7 @@ public final class Defs {
         public static final String MMCS_UNLOAD = "mmcsunload";
         public static final String MMCS_RELOAD = "mmcsreload";
         public static final String[] COMMAND_NAME = {"mymcserver", "mmcs"};
+        public static final String MMCS_REMOTE = "mmcsremote";
     }
 
     // Connection Constants
