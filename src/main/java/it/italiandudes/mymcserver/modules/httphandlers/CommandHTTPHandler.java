@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import it.italiandudes.mymcserver.MyMCServer;
 import it.italiandudes.mymcserver.modules.CommandsModule.PlayerCommandSender;
 import it.italiandudes.mymcserver.modules.ConnectionModule;
+import it.italiandudes.mymcserver.modules.httphandlers.remote.RemoteUser;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Connection.Context;
 import it.italiandudes.mymcserver.utils.Defs.Connection.Header;
@@ -49,15 +50,15 @@ public final class CommandHTTPHandler implements HttpHandler {
         String command = commandHeader.get(0);
 
         // Getting the username from the token
-        String username = ConnectionModule.getUserByToken(token);
-        if (username == null) {
+        RemoteUser remoteUser = ConnectionModule.getUserByToken(token);
+        if (remoteUser == null) {
             ConnectionModule.CommonResponse.sendInternalServerError(exchange);
             exchange.close();
             return;
         }
 
         // Getting player from username
-        Player player = MyMCServer.getPluginInstance().getServer().getPlayer(username);
+        Player player = MyMCServer.getPluginInstance().getServer().getPlayer(remoteUser.getUsername());
         if (player == null) { // How it's possible that the user is null?
             ConnectionModule.CommonResponse.sendInternalServerError(exchange);
             exchange.close();
