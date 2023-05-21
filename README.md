@@ -7,19 +7,18 @@ This plugin will be useful only for OPs players.
 **Answer Type**: JSON
 **Response Charset**: ISO_8859_1
 ### API Documentation:
+```markdown
 - **Get the token of the user**:
     - **Request**:
         - "GET <SERVER_ADDRESS>/login HTTP/1.1"
         - **Request Headers**:
-          - "MMCS-Username":<USERNAME>
+          - "MMCS-Username":"<USERNAME>"
           - "MMCS-Password":<PASSWORD>
     - **Response**:
-```json
       {
         "return-code":<RETURN_CODE>,
         "token":<TOKEN>
       }
-```
 - **Send a command**:
     - **Request**:
         - "GET <SERVER_ADDRESS>/command HTTP/1.1"
@@ -27,19 +26,16 @@ This plugin will be useful only for OPs players.
           - "MMCS-Token":<TOKEN>
           - "MMCS-Command":<COMMAND>
     - **Response**:
-```json
       {
         "return-code":<RETURN_CODE>,
         "command-output":<COMMAND_OUTPUT>
       }
-```
 - **Get server stats**:
     - **Request**:
         - "GET <SERVER_ADDRESS>/stats HTTP/1.1"
         - **Request Headers**:
           - "MMCS-Token":<TOKEN>
     - **Response**:
-```json
       {
         "return-code":<RETURN_CODE>,
         "system-cpu-load":"<SYSTEM_CPU_LOAD>,
