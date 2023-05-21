@@ -47,6 +47,15 @@ public class MMCSRemoteCommand implements CommandExecutor {
             } catch (ModuleException ignored) {}
             return true;
         }
+        if (!sender.isOp()) {
+            try {
+                sender.sendMessage(
+                    ChatColor.RED +
+                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_MISSING_PERMISSIONS)
+                );
+            }catch (ModuleException ignored) {}
+            return true;
+        }
         if (args.length < 2) {
             try {
                 sender.sendMessage(
@@ -200,146 +209,10 @@ public class MMCSRemoteCommand implements CommandExecutor {
                     );
                 }
             } else {
-                switch (args[0]) {
-                    case Arguments.ENABLE_REMOTE -> {
-                        try {
-                            if (args.length == 4) {
-                                sender.sendMessage(
-                                    ChatColor.AQUA +
-                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_STARTED)
-                                );
-                                if (!args[2].equals(args[3])) { // Password mismatch
-                                    sender.sendMessage(
-                                        ChatColor.RED +
-                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
-                                    );
-                                } else {
-                                    int result = registerUser(args[1], args[2].toLowerCase());
-                                    if (result == 0) {
-                                        sender.sendMessage(
-                                            ChatColor.AQUA +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_SUCCESS)
-                                        );
-                                    } else if (result > 0) {
-                                        sender.sendMessage(
-                                            ChatColor.RED +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL_ALREADY_ENABLED)
-                                        );
-                                    } else {
-                                        sender.sendMessage(
-                                            ChatColor.RED +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL)
-                                        );
-                                    }
-                                }
-                            } else {
-                                sender.sendMessage(
-                                    ChatColor.RED +
-                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_SYNTAX_ERROR)
-                                );
-                            }
-                        } catch (ModuleException e) {
-                            ServerLogger.getLogger().severe("An error has occurred with a module");
-                            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
-                            sender.sendMessage(
-                                ChatColor.RED +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL)
-                            );
-                        }
-                    }
-
-                    case Arguments.DISABLE_REMOTE -> {
-                        try {
-                            if (args.length == 3) {
-                                sender.sendMessage(
-                                    ChatColor.AQUA +
-                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_STARTED)
-                                );
-                                int result = unregisterUser(args[1], args[2].toLowerCase());
-                                if (result == 0) {
-                                    sender.sendMessage(
-                                        ChatColor.AQUA +
-                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_SUCCESS)
-                                    );
-                                } else if (result > 0) {
-                                    sender.sendMessage(
-                                        ChatColor.RED +
-                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_FAIL_NOT_ENABLED)
-                                    );
-                                } else {
-                                    sender.sendMessage(
-                                        ChatColor.RED +
-                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_SYNTAX_ERROR)
-                                    );
-                                }
-                            } else {
-                                sender.sendMessage(
-                                    ChatColor.RED +
-                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_SYNTAX_ERROR)
-                                );
-                            }
-                        } catch (ModuleException e) {
-                            ServerLogger.getLogger().severe("An error has occurred with a module");
-                            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
-                            sender.sendMessage(
-                                ChatColor.RED +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_FAIL)
-                            );
-                        }
-                    }
-
-                    case Arguments.EDIT_REMOTE -> {
-                        try {
-                            if (args.length == 5) {
-                                sender.sendMessage(
-                                    ChatColor.AQUA +
-                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_STARTED)
-                                );
-                                if (!args[3].equals(args[4])) {
-                                    sender.sendMessage(
-                                        ChatColor.RED +
-                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
-                                    );
-                                } else {
-                                    int result = updateUser(args[1], args[2].toLowerCase(), args[3].toLowerCase());
-                                    if (result == 0) {
-                                        sender.sendMessage(
-                                            ChatColor.AQUA +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_SUCCESS)
-                                        );
-                                    } else if (result > 0) {
-                                        sender.sendMessage(
-                                            ChatColor.RED +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_FAIL_NOT_ENABLED_OR_PASSWORD_WRONG)
-                                        );
-                                    } else {
-                                        sender.sendMessage(
-                                            ChatColor.RED +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_FAIL)
-                                        );
-                                    }
-                                }
-                            } else {
-                                sender.sendMessage(
-                                    ChatColor.RED +
-                                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_SYNTAX_ERROR)
-                                );
-                            }
-                        } catch (ModuleException e) {
-                            ServerLogger.getLogger().severe("An error has occurred with a module");
-                            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
-                            sender.sendMessage(
-                                ChatColor.RED +
-                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_FAIL)
-                            );
-                        }
-                    }
-
-                    default -> sender.sendMessage(
-                        ChatColor.RED +
-                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_SYNTAX_ERROR)
-                    );
-                }
+                sender.sendMessage(
+                    ChatColor.RED +
+                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_CANT_BE_EXECUTED_FROM_REMOTE)
+                );
             }
         } catch (ModuleException e) {
             CommandsModule.sendDefaultError(sender, e);
