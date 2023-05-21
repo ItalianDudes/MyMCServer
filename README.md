@@ -3,8 +3,8 @@ A system that allows you to have real-time information on a minecraft server and
 This plugin will be useful only for OPs players.
 
 ## WebServer Protocol
-**Request Type**: HTTP
-**Answer Type**: JSON
+**Request Type**: HTTP\
+**Answer Type**: JSON\
 **Response Charset**: ISO_8859_1
 ### API Documentation:
 ```markdown
