@@ -62,7 +62,6 @@ public final class Defs {
 
         // Lang Keys
         public static final class Keys {
-            public static final String TEST_ENTRY = "test_entry";
             public static final String MMCS_VERSION = "mmcs_version";
             public static final String MMCS_INFO = "mmcs_info";
             public static final String COMMAND_EXECUTION_ERROR = "command_execution_error";
@@ -100,6 +99,7 @@ public final class Defs {
             public static final String COMMAND_REMOTE_EDIT_FAIL = "command_remote_edit_fail";
             public static final String COMMAND_PASSWORD_MISMATCH = "command_password_mismatch";
             public static final String COMMAND_REMOTE_EDIT_FAIL_NOT_ENABLED_OR_PASSWORD_WRONG = "command_remote_edit_fail_not_enabled_or_password_wrong";
+            public static final String COMMAND_REMOTE_CANT_BE_EXECUTED_FROM_REMOTE = "command_remote_cant_be_executed_from_remote";
         }
     }
 
@@ -168,16 +168,6 @@ public final class Defs {
             public static final String HEADER_TOKEN = "MMCS-Token";
             public static final String HEADER_COMMAND = "MMCS-Command";
         }
-    }
-
-    // Protocol
-    public static final class Protocol {
-        public static final class StartingProtocol {
-            public static final String STARTING_PROTOCOL_LOGIN = "login";
-        }
-        public static final String PROTOCOL_COMMAND = "command";
-        public static final String PROTOCOL_SSH = "ssh";
-        public static final String PROTOCOL_DISCONNECT = "disconnect";
     }
 
     // Executable Plugin
