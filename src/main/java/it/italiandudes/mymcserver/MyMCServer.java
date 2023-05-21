@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings("unused")
 public final class MyMCServer extends JavaPlugin {
 
     // Attributes
