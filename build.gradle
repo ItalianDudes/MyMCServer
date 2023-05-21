@@ -5,10 +5,10 @@ plugins {
 }
 
 //Version
-final String VERSION_MAJOR = '0' // Big updates, usually flagged as RELEASE
-final String VERSION_MINOR = '18' // Feature implementation, various patches
-final String VERSION_PATCH = '6' // Small patch
-final String VERSION_IDENTIFIER = 'A' // Valid Values: [R]elease, [B]eta, [A]lpha
+final String VERSION_MAJOR = '1' // Big updates, usually flagged as RELEASE
+final String VERSION_MINOR = '0' // Feature implementation, various patches
+final String VERSION_PATCH = '0' // Small patch
+final String VERSION_IDENTIFIER = 'R' // Valid Values: [R]elease, [B]eta, [A]lpha
 
 // Program Info
 group = 'it.italiandudes'
@@ -36,7 +36,6 @@ dependencies {
     compileOnly 'commons-codec:commons-codec:1.15'
     compileOnly 'commons-io:commons-io:2.11.0'
     implementation 'it.italiandudes:idl:1.0.5'
-    // implementation group: 'org.xerial', name:'sqlite-jdbc', version:'3.40.0.0'
 
 }
 
@@ -51,22 +50,12 @@ java {
 }
 
 shadowJar {
-    manifest {
-        attributes "Main-Class" : "it.italiandudes.mymcserver.ExecutablePlugin"
-    }
     archiveFileName = getRootDir().getName()+"-"+archiveVersion.get()+".jar"
 }
 tasks.register('buildPlugin') {
     dependsOn shadowJar
     group = "Build"
     description = "Build and assemble the plugin"
-}
-tasks.register('buildAndRun', Exec) {
-    dependsOn shadowJar
-    group = "Execution"
-    description = "Run the mainClass from the output jar in classpath with ExecTask"
-    commandLine "java", "-jar", jar.archiveFile.get()
-    standardInput = System.in
 }
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
