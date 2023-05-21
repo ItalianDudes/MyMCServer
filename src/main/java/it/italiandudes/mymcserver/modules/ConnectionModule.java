@@ -279,7 +279,7 @@ public final class ConnectionModule {
             preparedStatement.close();
             String newToken;
             Instant now = Instant.now();
-            if (expirationDate.after(new Date(now.plus(1, ChronoUnit.DAYS).toEpochMilli()))) {
+            if (expirationDate.before(new Date(now.plus(1, ChronoUnit.DAYS).toEpochMilli()))) {
                 long newExpirationDateEpoch = now.plus(7, ChronoUnit.DAYS).toEpochMilli();
                 Random random = new Random();
                 String rawToken = Math.abs(random.nextInt()) + '@' +username + '@' + newExpirationDateEpoch + '@' + sha512password + '@' + Math.abs(random.nextInt());
