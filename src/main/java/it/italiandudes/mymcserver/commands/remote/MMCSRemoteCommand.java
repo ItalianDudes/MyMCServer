@@ -36,7 +36,7 @@ public class MMCSRemoteCommand implements CommandExecutor {
     }
 
     // Command Body
-    @Override
+    @SuppressWarnings("DuplicatedCode") @Override
     public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!CommandsModule.isModuleLoaded() && !RUN_WITH_MODULE_NOT_LOADED) {
             try {
@@ -73,12 +73,18 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
                                     );
                                 } else {
-                                    if (registerUser(sender.getName(), DigestUtils.sha512Hex(args[1]).toLowerCase())) {
+                                    int result = registerUser(sender.getName(), DigestUtils.sha512Hex(args[1]).toLowerCase());
+                                    if (result == 0) {
                                         sender.sendMessage(
                                             ChatColor.AQUA +
                                             LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_SUCCESS)
                                         );
-                                    } else {
+                                    } else if (result > 0) {
+                                        sender.sendMessage(
+                                            ChatColor.RED +
+                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL_ALREADY_ENABLED)
+                                        );
+                                    }else {
                                         sender.sendMessage(
                                             ChatColor.RED +
                                             LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL)
@@ -92,6 +98,8 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                 );
                             }
                         } catch (ModuleException e) {
+                            ServerLogger.getLogger().severe("An error has occurred with a module");
+                            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
                             sender.sendMessage(
                                 ChatColor.RED +
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL)
@@ -106,10 +114,16 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                     ChatColor.AQUA +
                                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_STARTED)
                                 );
-                                if (unregisterUser(sender.getName(), DigestUtils.sha512Hex(args[1]).toLowerCase())) {
+                                int result = unregisterUser(sender.getName(), DigestUtils.sha512Hex(args[1]).toLowerCase());
+                                if (result == 0) {
                                     sender.sendMessage(
                                         ChatColor.AQUA +
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_SUCCESS)
+                                    );
+                                } else if (result > 0) {
+                                    sender.sendMessage(
+                                        ChatColor.RED +
+                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_FAIL_NOT_ENABLED)
                                     );
                                 } else {
                                     sender.sendMessage(
@@ -146,10 +160,16 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
                                     );
                                 } else {
-                                    if (updateUser(sender.getName(), DigestUtils.sha512Hex(args[1]).toLowerCase(), DigestUtils.sha512Hex(args[2]).toLowerCase())) {
+                                    int result = updateUser(sender.getName(), DigestUtils.sha512Hex(args[1]).toLowerCase(), DigestUtils.sha512Hex(args[2]).toLowerCase());
+                                    if (result == 0) {
                                         sender.sendMessage(
                                             ChatColor.AQUA +
                                             LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_SUCCESS)
+                                        );
+                                    } else if (result > 0) {
+                                        sender.sendMessage(
+                                            ChatColor.RED +
+                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_FAIL_NOT_ENABLED_OR_PASSWORD_WRONG)
                                         );
                                     } else {
                                         sender.sendMessage(
@@ -194,10 +214,16 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
                                     );
                                 } else {
-                                    if (registerUser(args[1], args[2].toLowerCase())) {
+                                    int result = registerUser(args[1], args[2].toLowerCase());
+                                    if (result == 0) {
                                         sender.sendMessage(
                                             ChatColor.AQUA +
                                             LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_SUCCESS)
+                                        );
+                                    } else if (result > 0) {
+                                        sender.sendMessage(
+                                            ChatColor.RED +
+                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL_ALREADY_ENABLED)
                                         );
                                     } else {
                                         sender.sendMessage(
@@ -213,6 +239,8 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                 );
                             }
                         } catch (ModuleException e) {
+                            ServerLogger.getLogger().severe("An error has occurred with a module");
+                            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
                             sender.sendMessage(
                                 ChatColor.RED +
                                 LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_ENABLE_FAIL)
@@ -227,10 +255,16 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                     ChatColor.AQUA +
                                     LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_STARTED)
                                 );
-                                if (unregisterUser(args[1], args[2].toLowerCase())) {
+                                int result = unregisterUser(args[1], args[2].toLowerCase());
+                                if (result == 0) {
                                     sender.sendMessage(
                                         ChatColor.AQUA +
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_SUCCESS)
+                                    );
+                                } else if (result > 0) {
+                                    sender.sendMessage(
+                                        ChatColor.RED +
+                                        LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_DISABLE_FAIL_NOT_ENABLED)
                                     );
                                 } else {
                                     sender.sendMessage(
@@ -267,10 +301,16 @@ public class MMCSRemoteCommand implements CommandExecutor {
                                         LocalizationModule.translate(Defs.Localization.Keys.COMMAND_PASSWORD_MISMATCH)
                                     );
                                 } else {
-                                    if (updateUser(args[1], args[2].toLowerCase(), args[3].toLowerCase())) {
+                                    int result = updateUser(args[1], args[2].toLowerCase(), args[3].toLowerCase());
+                                    if (result == 0) {
                                         sender.sendMessage(
                                             ChatColor.AQUA +
                                             LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_SUCCESS)
+                                        );
+                                    } else if (result > 0) {
+                                        sender.sendMessage(
+                                            ChatColor.RED +
+                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_REMOTE_EDIT_FAIL_NOT_ENABLED_OR_PASSWORD_WRONG)
                                         );
                                     } else {
                                         sender.sendMessage(
@@ -308,9 +348,9 @@ public class MMCSRemoteCommand implements CommandExecutor {
     }
 
     // Methods
-    private boolean registerUser(@NotNull final String username, @NotNull final String sha512password) {
+    private int registerUser(@NotNull final String username, @NotNull final String sha512password) {
         PreparedStatement ps = null;
-        if (isUserRegistered(username)!=null) return false;
+        if (isUserRegistered(username)!=null) return 1;
         try {
             RemoteUser remoteUser = ConnectionModule.generateRemoteUser(username, sha512password);
             String query = "INSERT INTO remote_users (username, sha512password, token, token_expiration_date) VALUES (?,?,?,?);";
@@ -321,45 +361,53 @@ public class MMCSRemoteCommand implements CommandExecutor {
             ps.setDate(4, remoteUser.getTokenExpirationDate());
             ps.executeUpdate();
             ps.close();
-            return true;
-        }catch (SQLException | ModuleException e) {
+            return 0;
+        } catch (SQLException sqlException) {
             try {
-                if (ps != null) ps.close();
+                ps.close();
             }catch (SQLException ignored){}
-            return false;
+            return 1;
+        }catch (ModuleException e) {
+            ServerLogger.getLogger().severe("Module error has occurred");
+            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
+            return -1;
         }
     }
-    private boolean unregisterUser(@NotNull String username, @NotNull final String password) {
-        String sha512password = DigestUtils.sha512Hex(password);
-        if (!checkPassword(username, sha512password)) return false;
+    private int unregisterUser(@NotNull String username, @NotNull final String sha512password) {
+        if (!checkPassword(username, sha512password)) return 1;
         PreparedStatement ps = null;
         try {
             String token = ConnectionModule.getUserToken(username, sha512password);
-            if (token == null) return false;
+            if (token == null) return 1;
             RemoteUser remoteUser = ConnectionModule.getUserByToken(token);
-            if (remoteUser == null || remoteUser.getUserID() == null) return false;
+            if (remoteUser == null || remoteUser.getUserID() == null) return 1;
             String query = "DELETE FROM remote_users WHERE user_id=?;";
             ps = DBConnectionModule.getPreparedStatement(query);
             ps.setInt(1, remoteUser.getUserID());
             ps.executeUpdate();
             ps.close();
-            return true;
-        }catch (SQLException | ModuleException e) {
+            return 0;
+        }catch (SQLException sqlException) {
             try {
-                if (ps != null) ps.close();
-            } catch (SQLException ignored){}
-            return false;
+                ps.close();
+            }catch (SQLException ignored){}
+            sqlException.printStackTrace();
+            return 1;
+        }catch (ModuleException e) {
+            ServerLogger.getLogger().severe("Module error has occurred");
+            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
+            return -1;
         }
     }
-    private boolean updateUser(@NotNull final String username, @NotNull final String oldSha512password, @NotNull final String newSha512password) {
-        if (oldSha512password.equals(newSha512password)) return true;
+    private int updateUser(@NotNull final String username, @NotNull final String oldSha512password, @NotNull final String newSha512password) {
+        if (oldSha512password.equals(newSha512password)) return 0;
         PreparedStatement ps = null;
-        if (isUserRegistered(username)==null) return false;
-        if (!checkPassword(username, oldSha512password)) return false;
+        if (isUserRegistered(username)==null) return 1;
+        if (!checkPassword(username, oldSha512password)) return 1;
         String oldToken = ConnectionModule.getUserToken(username, oldSha512password);
-        if (oldToken == null) return false;
+        if (oldToken == null) return 1;
         RemoteUser oldRemoteUser = ConnectionModule.getUserByToken(oldToken);
-        if (oldRemoteUser == null || oldRemoteUser.getUserID() == null) return false;
+        if (oldRemoteUser == null || oldRemoteUser.getUserID() == null) return 1;
         RemoteUser newRemoteUser = ConnectionModule.generateRemoteUser(username, newSha512password);
         try {
             String query = "UPDATE remote_users SET sha512password=?, token=?, token_expiration_date=? WHERE user_id=?;";
@@ -370,17 +418,22 @@ public class MMCSRemoteCommand implements CommandExecutor {
             ps.setInt(4, oldRemoteUser.getUserID());
             ps.executeUpdate();
             ps.close();
-            return true;
-        }catch (SQLException | ModuleException e) {
+            return 0;
+        }catch (SQLException sqlException) {
             try {
-                if (ps != null) ps.close();
+                ps.close();
             } catch (SQLException ignored){}
-            return false;
+            sqlException.printStackTrace();
+            return 1;
+        }catch (ModuleException e) {
+            ServerLogger.getLogger().severe("Error module has occurred");
+            ServerLogger.getLogger().severe(StringHandler.getStackTrace(e));
+            return -1;
         }
     }
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkPassword(@NotNull final String username, @NotNull final String sha512password) {
-        String query = "SELECT * FROM username=? AND sha512password=?;";
+        String query = "SELECT * FROM remote_users WHERE username=? AND sha512password=?;";
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
@@ -409,7 +462,7 @@ public class MMCSRemoteCommand implements CommandExecutor {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            String query = "SELECT user_id token FROM remote_users WHERE username=?;";
+            String query = "SELECT user_id, token FROM remote_users WHERE username=?;";
             ps = DBConnectionModule.getPreparedStatement(query);
             ps.setString(1, username);
             result = ps.executeQuery();
