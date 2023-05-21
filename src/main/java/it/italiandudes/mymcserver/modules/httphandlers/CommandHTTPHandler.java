@@ -28,6 +28,11 @@ public final class CommandHTTPHandler implements HttpHandler {
     @Override @SuppressWarnings({"unchecked", "DuplicatedCode"})
     public void handle(@NotNull final HttpExchange exchange) throws IOException {
 
+        // Send NOT FOUND if the context was not correct
+        if (!exchange.getRequestURI().toString().equals(CONTEXT)) {
+            ConnectionModule.CommonResponse.sendNotFound(exchange);
+        }
+
         // Get Headers
         Headers requestHeaders = exchange.getRequestHeaders();
 
