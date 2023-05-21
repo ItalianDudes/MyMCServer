@@ -10,12 +10,12 @@ import it.italiandudes.mymcserver.modules.httphandlers.remote.RemoteUser;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Connection.Context;
 import it.italiandudes.mymcserver.utils.Defs.Connection.Header;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("unused")
