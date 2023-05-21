@@ -2,7 +2,6 @@ package it.italiandudes.mymcserver.modules;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import it.italiandudes.idl.common.RawSerializer;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.exceptions.modules.*;
 import it.italiandudes.mymcserver.modules.httphandlers.CommandHTTPHandler;
@@ -76,6 +75,9 @@ public final class ConnectionModule {
             httpServer.createContext(CommandHTTPHandler.CONTEXT, new CommandHTTPHandler());
             httpServer.createContext(StatsHTTPHandler.CONTEXT, new StatsHTTPHandler());
             httpServer.createContext(LoginHTTPHandler.CONTEXT, new LoginHTTPHandler());
+
+            // Starting up the server listener
+            httpServer.start();
         } catch (BindException bindException) {
             areConnectionLoading = false;
             if (!disableLog) ServerLogger.getLogger().severe("Connection Module Load: Failed (Reason: the provided port for listen is already used somewhere else");
@@ -188,7 +190,8 @@ public final class ConnectionModule {
         int jsonReturnCode = (int) response.get(JSONContent.RETURN_CODE);
         byte[] responseBodyBytes = response.toJSONString().getBytes(StandardCharsets.ISO_8859_1);
         exchange.sendResponseHeaders(jsonReturnCode, responseBodyBytes.length);
-        RawSerializer.sendBytes(exchange.getResponseBody(), responseBodyBytes);
+        exchange.getResponseBody().write(responseBodyBytes, 0, responseBodyBytes.length);
+        exchange.getResponseBody().flush();
     }
     @SuppressWarnings("unchecked")
     private static JSONObject getLocalizedErrorJSON(final int returnCode) {
