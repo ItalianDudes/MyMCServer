@@ -240,9 +240,10 @@ public final class ConnectionModule {
             }
             result.close();
             preparedStatement.close();
-            if (count < 0 || count > 1 || userID == null || username == null || sha512password == null || expirationDate == null) { // How is even possible that a token can have multiple users or count be less than 0?
+            if (count < 0 || count > 1) { // How is even possible that a token can have multiple users or count be less than 0?
                 throw new SQLException("How is even possible that a token can have multiple users?");
             }
+            if (count == 0) return null;
             return new RemoteUser(userID, username, sha512password, token, expirationDate);
         } catch (ModuleException | SQLException e) {
             try {
