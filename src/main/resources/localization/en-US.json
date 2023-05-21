@@ -27,11 +27,14 @@
   "command_password_mismatch": "Can't execute the command: the passwords doesn't match.",
   "command_remote_enable_started": "Attempting to enable remote access...",
   "command_remote_enable_success": "Remote access enabling success!",
-  "command_remote_enable_fail": "Remote access enabling failed!",
+  "command_remote_enable_fail": "Remote access enabling failed: An error has occurred on server side!",
   "command_remote_disable_started": "Attempting to disable remote access...",
   "command_remote_disable_success": "Remote access disabling success!",
   "command_remote_disable_fail": "Remote access disabling failed!",
   "command_remote_edit_started": "Attempting to edit remote access...",
   "command_remote_edit_success": "Remote access editing success!",
-  "command_remote_edit_fail": "Remote access editing failed!"
+  "command_remote_edit_fail": "Remote access editing failed!",
+  "command_remote_enable_fail_already_enabled": "Remote access enabling failed: this user is already enabled on remote access!",
+  "command_remote_disable_fail_not_enabled": "Remote access disabling failed: this user wasn't enabled on remote access!",
+  "command_remote_edit_fail_not_enabled_or_password_wrong": "Remote access editing failed: this user wasn't enabled on remote access or the password is wrong!"
 }

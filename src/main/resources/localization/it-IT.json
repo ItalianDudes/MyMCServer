@@ -27,11 +27,14 @@
   "command_password_mismatch": "Impossibile eseguire il comando: le password non corrispondono.",
   "command_remote_enable_started": "Attivazione accesso remoto in corso...",
   "command_remote_enable_success": "Attivazione accesso remoto avvenuta con successo!",
-  "command_remote_enable_fail": "Attivazione accesso remoto fallita!",
+  "command_remote_enable_fail": "Attivazione accesso remoto fallita: Si è verificato un errore lato server!",
   "command_remote_disable_started": "Disattivazione accesso remoto in corso...",
   "command_remote_disable_success": "Disattivazione accesso remoto avvenuta con successo!",
   "command_remote_disable_fail": "Disattivazione accesso remoto fallita!",
   "command_remote_edit_started": "Modifica accesso remoto in corso...",
   "command_remote_edit_success": "Modifica accesso remoto avvenuta con successo!",
-  "command_remote_edit_fail": "Modifica accesso remoto fallita!"
+  "command_remote_edit_fail": "Modifica accesso remoto fallita!",
+  "command_remote_enable_fail_already_enabled": "Attivazione accesso remoto fallita: questo utente è già abilitato all'accesso remoto!",
+  "command_remote_disable_fail_not_enabled": "Disattivazione accesso remoto fallita: questo utente non era abilitato all'accesso remoto!",
+  "command_remote_edit_fail_not_enabled_or_password_wrong": "Modifica accesso remoto fallita: questo utente un è abilitato all'accesso remoto o la password è sbagliata!"
 }
