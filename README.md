@@ -13,32 +13,32 @@ This plugin will be useful only for OPs players.
         - "GET <SERVER_ADDRESS>/login HTTP/1.1"
         - **Request Headers**:
           - "MMCS-Username":"<USERNAME>"
-          - "MMCS-Password":<PASSWORD>
+          - "MMCS-Password":"<PASSWORD>"
     - **Response**:
       {
         "return-code":<RETURN_CODE>,
-        "token":<TOKEN>
+        "token":"<TOKEN>"
       }
 - **Send a command**:
     - **Request**:
         - "GET <SERVER_ADDRESS>/command HTTP/1.1"
         - **Request Headers**:
-          - "MMCS-Token":<TOKEN>
-          - "MMCS-Command":<COMMAND>
+          - "MMCS-Token":"<TOKEN>"
+          - "MMCS-Command":"<COMMAND>"
     - **Response**:
       {
         "return-code":<RETURN_CODE>,
-        "command-output":<COMMAND_OUTPUT>
+        "command-output":"<COMMAND_OUTPUT>"
       }
 - **Get server stats**:
     - **Request**:
         - "GET <SERVER_ADDRESS>/stats HTTP/1.1"
         - **Request Headers**:
-          - "MMCS-Token":<TOKEN>
+          - "MMCS-Token":"<TOKEN>"
     - **Response**:
       {
         "return-code":<RETURN_CODE>,
-        "system-cpu-load":"<SYSTEM_CPU_LOAD>,
+        "system-cpu-load":<SYSTEM_CPU_LOAD>,
         "process-cpu-load":<PROCESS_CPU_LOAD>,
         "total-memory":<TOTAL_MEMORY>,
         "free-memory":<FREE_MEMORY>,
