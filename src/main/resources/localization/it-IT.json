@@ -1,7 +1,6 @@
 {
-  "test_entry": "valore di test",
-  "ee_version": "Versione di EnhancedEconomy: ",
-  "ee_info": "Nome Plugin: EnhancedEconomy\nAutore: Hacker6329\nDescrizione: Un plugin che implementa un sistema economico simil-realistico.",
+  "mmcs_version": "Versione di MyMCServer: ",
+  "mmcs_info": "Nome Plugin: MyMCServer\nAutore: Hacker6329\nDescrizione: Un plugin minecraft che permette agli OP di accedere da remoto alla server console e di vedere informazioni circa lo stato del server.",
   "command_execution_error": "Si è verificato un errore durante l'esecuzione del comando.",
   "command_syntax_error": "La sintassi del comando è errata, consulta per capire come funziona usando il comando /help <comando>",
   "command_loading_started": "Caricamento Modulo: ",
@@ -36,5 +35,6 @@
   "command_remote_edit_fail": "Modifica accesso remoto fallita!",
   "command_remote_enable_fail_already_enabled": "Attivazione accesso remoto fallita: questo utente è già abilitato all'accesso remoto!",
   "command_remote_disable_fail_not_enabled": "Disattivazione accesso remoto fallita: questo utente non era abilitato all'accesso remoto!",
-  "command_remote_edit_fail_not_enabled_or_password_wrong": "Modifica accesso remoto fallita: questo utente un è abilitato all'accesso remoto o la password è sbagliata!"
+  "command_remote_edit_fail_not_enabled_or_password_wrong": "Modifica accesso remoto fallita: questo utente un è abilitato all'accesso remoto o la password è sbagliata!",
+  "command_remote_cant_be_executed_from_remote": "Impossibile eseguire il comando: questo comando non può esser eseguito da remoto"
 }

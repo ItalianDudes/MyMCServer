@@ -1,7 +1,6 @@
 {
-  "test_entry": "test_entry",
-  "ee_version": "EnhancedEconomy Version: ",
-  "ee_info": "Plugin Name: EnhancedEconomy\nAuthor: Hacker6329\nDescription: A plugin that implements a similar realistic economy system.",
+  "ee_version": "MyMCServer Version: ",
+  "ee_info": "Plugin Name: MyMCServer\nAuthor: Hacker6329\nDescription: A minecraft plugin that allows you to have real-time information on a minecraft server and to send commands via chat.",
   "command_execution_error": "An error has occurred during the command execution.",
   "command_syntax_error": "The syntax of the command is wrong, check the usage using /help <command>",
   "command_loading_started": "Loading Module: ",
@@ -36,5 +35,6 @@
   "command_remote_edit_fail": "Remote access editing failed!",
   "command_remote_enable_fail_already_enabled": "Remote access enabling failed: this user is already enabled on remote access!",
   "command_remote_disable_fail_not_enabled": "Remote access disabling failed: this user wasn't enabled on remote access!",
-  "command_remote_edit_fail_not_enabled_or_password_wrong": "Remote access editing failed: this user wasn't enabled on remote access or the password is wrong!"
+  "command_remote_edit_fail_not_enabled_or_password_wrong": "Remote access editing failed: this user wasn't enabled on remote access or the password is wrong!",
+  "command_remote_cant_be_executed_from_remote": "Can't execute the command: this command can't be executed from remote"
 }
