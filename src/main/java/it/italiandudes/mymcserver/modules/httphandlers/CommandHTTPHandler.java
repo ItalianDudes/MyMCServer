@@ -4,20 +4,19 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import it.italiandudes.mymcserver.MyMCServer;
-import it.italiandudes.mymcserver.modules.CommandsModule.PlayerCommandSender;
 import it.italiandudes.mymcserver.modules.ConnectionModule;
+import it.italiandudes.mymcserver.modules.commandsender.RemoteCommandSender;
 import it.italiandudes.mymcserver.modules.httphandlers.remote.RemoteUser;
 import it.italiandudes.mymcserver.utils.Defs;
 import it.italiandudes.mymcserver.utils.Defs.Connection.Context;
 import it.italiandudes.mymcserver.utils.Defs.Connection.Header;
-import org.bukkit.entity.Player;
+import org.bukkit.*;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("unused")
 public final class CommandHTTPHandler implements HttpHandler {
@@ -52,31 +51,26 @@ public final class CommandHTTPHandler implements HttpHandler {
         // Getting the username from the token
         RemoteUser remoteUser = ConnectionModule.getUserByToken(token);
         if (remoteUser == null) {
-            ConnectionModule.CommonResponse.sendInternalServerError(exchange);
+            ConnectionModule.CommonResponse.sendForbidden(exchange);
             exchange.close();
             return;
         }
 
-        // Getting player from username
-        Player player = MyMCServer.getPluginInstance().getServer().getPlayer(remoteUser.getUsername());
-        if (player == null) { // How it's possible that the user is null?
-            ConnectionModule.CommonResponse.sendInternalServerError(exchange);
-            exchange.close();
-            return;
-        }
+        // Creating instance of RemoteCommandSender
+        RemoteCommandSender remoteCommandSender = new RemoteCommandSender(Bukkit.getConsoleSender());
 
         // Sending the command with a fake instance of the player
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(outStream);
-        PlayerCommandSender commandSender = new PlayerCommandSender(player, printStream);
-        MyMCServer.getServerInstance().dispatchCommand(commandSender, command);
-        String commandOutput = outStream.toString();
-        try {
-            printStream.close();
-        }catch (Exception ignored) {}
-        try {
-            outStream.close();
-        }catch (Exception ignored) {}
+        AtomicBoolean finish = new AtomicBoolean(false);
+        Runnable runnable = () -> {
+            Bukkit.dispatchCommand(remoteCommandSender, command);
+            finish.set(true);
+        };
+        Bukkit.getScheduler().runTask(MyMCServer.getPluginInstance(), runnable);
+
+        //noinspection StatementWithEmptyBody
+        while (!finish.get());
+
+        String commandOutput = remoteCommandSender.getChatOutput();
 
         // Send the response
         JSONObject response = new JSONObject();
