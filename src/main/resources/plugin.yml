@@ -1,5 +1,5 @@
 name: MyMCServer
-version: '0.16.5A'
+version: '0.17.4A'
 author: Hacker6329
 prefix: MyMCServer
 main: it.italiandudes.mymcserver.MyMCServer
@@ -24,5 +24,5 @@ commands:
     description: Reload one or more plugin's modules.
     usage: /<command> <module> <parameters> [module1 parameters1 ...]
   mmcsremote:
-    description: Remote user access interface. DISCLAIMER If used from server, you must specify after the operation (enable|disable|edit) the username, and all the passwords must be already in sha512
+    description: Remote user access interface. NB You can't use this command from remote
     usage: /<command> (enable <password> <confirm_password>)|(disable <password>)|(edit <old_password> <new_password> <confirm_new_password>)
