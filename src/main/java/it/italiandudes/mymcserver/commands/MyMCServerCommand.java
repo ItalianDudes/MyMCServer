@@ -1,5 +1,6 @@
 package it.italiandudes.mymcserver.commands;
 
+import it.italiandudes.mymcserver.MyMCServer;
 import it.italiandudes.mymcserver.exceptions.ModuleException;
 import it.italiandudes.mymcserver.modules.*;
 import it.italiandudes.mymcserver.utils.Defs;
@@ -25,6 +26,7 @@ public final class MyMCServerCommand implements CommandExecutor {
     }
 
     // Command Body
+    @SuppressWarnings("UnstableApiUsage")
     @Override
     public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!CommandsModule.isModuleLoaded() && !RUN_WITH_MODULE_NOT_LOADED) {
@@ -36,7 +38,15 @@ public final class MyMCServerCommand implements CommandExecutor {
             } catch (ModuleException ignored) {}
             return true;
         }
-        if (args.length < 1) return false;
+        if (args.length < 1) {
+            try {
+                sender.sendMessage(
+                    ChatColor.RED +
+                    LocalizationModule.translate(Defs.Localization.Keys.COMMAND_INSUFFICIENT_PARAMETERS)
+                );
+            }catch (ModuleException ignored) {}
+            return true;
+        }
 
         try {
 
@@ -49,7 +59,7 @@ public final class MyMCServerCommand implements CommandExecutor {
                 case Arguments.VERSION -> sender.sendMessage(
                     ChatColor.AQUA +
                     LocalizationModule.translate(Keys.MMCS_VERSION) +
-                    Defs.PluginInfo.PLUGIN_VERSION
+                    MyMCServer.getPluginInstance().getPluginMeta().getVersion()
                 );
 
                 case Arguments.MODULE_STATUS -> {

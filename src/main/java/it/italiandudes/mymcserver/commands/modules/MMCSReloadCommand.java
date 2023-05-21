@@ -138,8 +138,8 @@ public final class MMCSReloadCommand implements CommandExecutor {
                     case Defs.ModuleNames.MODULE_LOCALIZATION -> {
                         if (!LocalizationModule.isModuleLoaded()) {
                             sender.sendMessage(
-                                    ChatColor.RED +
-                                            LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
+                                ChatColor.RED +
+                                LocalizationModule.translate(Defs.Localization.Keys.COMMAND_RELOADING_MODULE_IS_OFF)
                             );
                         } else if (i + 1 < args.length) {
                             i++;
